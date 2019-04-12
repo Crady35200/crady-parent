@@ -7,7 +7,7 @@ import java.lang.reflect.Proxy;
 /**
  * author:Crady
  * date:2019/1/15 11:28
- * desc:jdk实现-动态代理  仅适用于目标类需要实现制定接口
+ * desc:jdk实现-动态代理  仅适用于目标类需要实现指定接口
  **/
 public class DynamicProxyFactory implements InvocationHandler {
 

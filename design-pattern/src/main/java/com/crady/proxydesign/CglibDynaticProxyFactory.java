@@ -13,12 +13,6 @@ import java.lang.reflect.Method;
  **/
 public class CglibDynaticProxyFactory implements MethodInterceptor {
 
-    private Object target;
-
-    public CglibDynaticProxyFactory(Object target) {
-        this.target = target;
-    }
-
     public Object getInstance(Object target){
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(target.getClass());
@@ -29,7 +23,7 @@ public class CglibDynaticProxyFactory implements MethodInterceptor {
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         System.out.println("cglib dynatic invoke start ...");
-        method.invoke(target,objects);
+        methodProxy.invokeSuper(o,objects);
         System.out.println("cglib dynatic invoke end ...");
         return null;
     }

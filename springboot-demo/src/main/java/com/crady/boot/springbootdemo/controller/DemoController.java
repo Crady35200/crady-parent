@@ -13,12 +13,21 @@ import javax.validation.constraints.Size;
  **/
 @RestController
 @Validated
+//@Scope("prototype")
 public class DemoController{
 
 
+    ThreadLocal<String> name = new ThreadLocal<>();
+
     @RequestMapping("hello")
     public String hello(String words){
-        String result = "Hi," + words + ",nice to meet you !";
+        try {
+            name.set(words);
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String result = "Hi," + name.get() + ",nice to meet you !" + this;
         return result;
     }
 

@@ -2,8 +2,6 @@ package com.crady.singledesign;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * author:Crady
  * date:2019/1/4 16:17

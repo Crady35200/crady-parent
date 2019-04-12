@@ -9,7 +9,7 @@ package com.crady.singledesign;
  * 而静态内部类方式在Singleton类被装载时并不会立即实例化，而是在需要实例化时，调用getInstance方法，
  * 才会装载SingletonInstance类，从而完成Singleton的实例化。
  * 优点：在避免了线程不安全，延迟加载，效率高
- * 缺点：使用synchronized实现了同步，但是性能低下
+ * 缺点：
  **/
 public class SingleDesign7 {
 

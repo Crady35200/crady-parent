@@ -26,7 +26,7 @@ public class ProxyDesignTest {
     @Test
     public void testCglibDynaticProxyDesign(){
         UserService userService = new UserService();
-        UserService proxyFactory = (UserService) new CglibDynaticProxyFactory(userService).getInstance(userService);
+        UserService proxyFactory = (UserService) new CglibDynaticProxyFactory().getInstance(userService);
         proxyFactory.say("Hi,nice to meet you !");
     }
 }
