@@ -14,7 +14,7 @@
       <module>crady-demo</module>
       <module>mq-activemq</module>
       <module>springboot-demo</module>
-    <module>mybatis-demo</module>
+      <module>mybatis-demo</module>
 
   </modules>
 
@@ -29,16 +29,29 @@
   </properties>
 
   <dependencies>
+    <!--为了使用日志注解@Slf4j start-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+    <!--为了使用日志注解@Slf4j start-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>5.0.7.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
