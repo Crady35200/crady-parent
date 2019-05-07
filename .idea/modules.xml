@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/crady-demo/crady-demo.iml" filepath="$PROJECT_DIR$/crady-demo/crady-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/crady-parent.iml" filepath="$PROJECT_DIR$/.idea/crady-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/design-pattern/design-pattern.iml" filepath="$PROJECT_DIR$/design-pattern/design-pattern.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mq-activemq/mq-activemq.iml" filepath="$PROJECT_DIR$/mq-activemq/mq-activemq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mybatis-demo/mybatis-demo.iml" filepath="$PROJECT_DIR$/mybatis-demo/mybatis-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-demo/springboot-demo.iml" filepath="$PROJECT_DIR$/springboot-demo/springboot-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/thread-concurrent/thread-concurrent.iml" filepath="$PROJECT_DIR$/thread-concurrent/thread-concurrent.iml" />
+    </modules>
+  </component>
+</project>
