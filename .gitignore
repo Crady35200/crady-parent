@@ -1,8 +1,12 @@
 #Java class file
 *.class
+/target/
 
 #Log file
 *.log
+
+#idea file
+.idea/
 
 #Package Files
 *.jar
