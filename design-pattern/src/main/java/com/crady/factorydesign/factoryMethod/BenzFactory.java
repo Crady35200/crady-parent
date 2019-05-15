@@ -10,7 +10,7 @@ import com.crady.factorydesign.Car;
  **/
 public class BenzFactory implements ICarFacrory {
     @Override
-    public Car getBean() {
+    public Car getCar() {
         return new BenzCar();
     }
 }

@@ -9,6 +9,6 @@ import com.crady.factorydesign.Car;
  **/
 public interface ICarFacrory {
 
-    public Car getBean();
+    public Car getCar();
 
 }
