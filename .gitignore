@@ -6,7 +6,7 @@
 *.log
 
 #idea file
-.idea/
+.idea/*
 
 #Package Files
 *.jar
