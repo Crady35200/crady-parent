@@ -1,13 +1,16 @@
 package com.crady.proxydesign;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * author:Crady
  * date:2019/1/15 11:27
  * desc:
  **/
-public class Teacher implements Person {
+@Slf4j
+public class Teacher implements IPerson {
     @Override
     public void say(String words) {
-        System.out.println("teacher say:" + words);
+        log.info("teacher say:" + words);
     }
 }

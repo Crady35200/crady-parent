@@ -1,12 +1,15 @@
 package com.crady.proxydesign;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * author:Crady
  * date:2019/1/15 14:13
  * desc:
  **/
+@Slf4j
 public class UserService {
     public void say(String words){
-        System.out.println("userService say:" + words);
+        log.info("userService say:{}",words);
     }
 }

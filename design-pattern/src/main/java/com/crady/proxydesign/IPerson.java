@@ -5,7 +5,7 @@ package com.crady.proxydesign;
  * date:2019/1/15 11:26
  * desc:
  **/
-public interface Person {
+public interface IPerson {
 
     void say(String words);
 }
