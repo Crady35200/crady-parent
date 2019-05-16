@@ -2,8 +2,6 @@ package com.crady.delegateDesign;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @author :Crady
  * date :2019/5/16 11:30
