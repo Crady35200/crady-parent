@@ -3,6 +3,7 @@ package com.crady;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.Assert.assertTrue;
@@ -105,5 +106,11 @@ public class AppTest {
         System.out.println(str == s3);
         System.out.println(str == s4);
         System.out.println(str.hashCode() + "," + s1.hashCode());
+    }
+
+    @Test
+    public void demo6(){
+        ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap<String,String>();
+        concurrentHashMap.put("1","a");
     }
 }
