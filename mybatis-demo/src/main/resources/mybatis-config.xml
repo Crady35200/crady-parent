@@ -1,19 +1,28 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <properties resource="jdbc.properties"/>
+    <properties resource="db.properties"/>
+
     <settings>
-        <setting name="logImpl" value="LOG4J"/>
+        <!-- Globally enables or disables any caches configured in any mapper under this configuration -->
+        <setting name="cacheEnabled" value="false"/>
+        <!-- Sets the number of seconds the driver will wait for a response from the database -->
+        <setting name="defaultStatementTimeout" value="5"/>
+        <!-- Enables automatic mapping from classic database column names A_COLUMN to camel case classic Java property names aColumn -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- Allows JDBC support for generated keys. A compatible driver is required.
+        This setting forces generated keys to be used if set to true,
+         as some drivers deny compatibility but still work -->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--<setting name="logImpl" value="LOG4J"/>-->
+        <!--嵌套查询是否懒加载(全局)，默认为false-->
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <!--当开启时，任何方法的调用都会加载该对象的所有属性。 否则，每个属性会按需加载
+        默认false（在 3.4.1 及之前的版本默认值为 true）-->
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
-    <!--分页插件-->
-    <plugins>
-        <plugin interceptor="com.github.pagehelper.PageInterceptor">
-            <!-- config params as the following -->
-            <property name="helperDialect" value="mysql"/>
-        </plugin>
-    </plugins>
+<!--
+    &lt;!&ndash; Continue editing here &ndash;&gt;
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -25,7 +34,10 @@
             </dataSource>
         </environment>
     </environments>
+
     <mappers>
-        <mapper resource="mapper/UserMapper.xml"/>
-    </mappers>
+        <mapper resource="sqlmapper/UserMapper.xml"/>
+        <mapper resource="sqlmapper/UserAccountMapper.xml"/>
+    </mappers>-->
+
 </configuration>
