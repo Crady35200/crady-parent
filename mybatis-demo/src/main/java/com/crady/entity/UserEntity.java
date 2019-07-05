@@ -16,5 +16,6 @@ public class UserEntity extends BaseEntity {
     private String sex;
     private UserAccountEntity userAccountEntity;
     private List<JobEntity> jobEntities;
+    private BaseEntity baseEntity;
 
 }

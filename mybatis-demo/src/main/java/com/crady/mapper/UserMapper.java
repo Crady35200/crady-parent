@@ -18,6 +18,7 @@ public interface UserMapper {
     //conplex query 1:1
     UserEntity selectUserAccount1(@Param("id")Integer id,@Param("name")String name);
     List<UserEntity> selectUserAccount2(Integer[] ids);
+    List<UserEntity> selectUserHealth(Integer[] ids);
 
     //conplex query 1:N
     UserEntity selectUserJob1(@Param("id")Integer id);

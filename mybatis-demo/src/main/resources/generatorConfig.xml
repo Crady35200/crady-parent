@@ -41,7 +41,11 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <table tableName="t_job" domainObjectName="JobEntity" mapperName="JobMapper"
+        <table tableName="t_health_male" domainObjectName="HealthMaleEntity" mapperName="HealthMaleMapper"
+               enableCountByExample="false" enableDeleteByExample="false" selectByExampleQueryId="false"
+               enableSelectByExample="false" enableUpdateByExample="false" />
+
+        <table tableName="t_health_female" domainObjectName="HealthFemaleEntity" mapperName="HealthFemaleMapper"
                enableCountByExample="false" enableDeleteByExample="false" selectByExampleQueryId="false"
                enableSelectByExample="false" enableUpdateByExample="false" />
     </context>

@@ -5,6 +5,7 @@
 
     <settings>
         <!-- Globally enables or disables any caches configured in any mapper under this configuration -->
+        <!--二级缓存的全局开关，如果此处设置为false则后面小开关打开也没有用-->
         <setting name="cacheEnabled" value="true"/>
         <!-- Sets the number of seconds the driver will wait for a response from the database -->
         <setting name="defaultStatementTimeout" value="5"/>
@@ -21,8 +22,7 @@
         默认false（在 3.4.1 及之前的版本默认值为 true）-->
         <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
-<!--
-    &lt;!&ndash; Continue editing here &ndash;&gt;
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -38,6 +38,6 @@
     <mappers>
         <mapper resource="sqlmapper/UserMapper.xml"/>
         <mapper resource="sqlmapper/UserAccountMapper.xml"/>
-    </mappers>-->
+    </mappers>
 
 </configuration>

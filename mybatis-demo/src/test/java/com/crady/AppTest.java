@@ -95,6 +95,23 @@ public class AppTest
         }
         logger.info("【嵌套SQL查询(1:N) + 懒加载】结束");
     }
+
+    @Test
+    public void descriminatorTest(){
+        List<UserEntity> userEntities = userMapper.selectUserHealth(new Integer[]{1,2,3,4});
+        for (UserEntity userEntity : userEntities){
+            logger.info("============={}",userEntity);
+        }
+    }
+
+    @Test
+    public void cacheTest(){
+        UserEntity userEntity1 = userMapper.selectByPrimaryKey(3);
+        logger.info("userEntity1={}",userEntity1);
+        UserEntity userEntity2 = userMapper.selectByPrimaryKey(3);
+        logger.info("userEntity2={}",userEntity2);
+    }
+
     @Test
     public void insertTest(){
 /*        UserEntity userEntity = new UserEntity();
