@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import com.crady.entity.UserEntity;
 import com.crady.mapper.UserMapper;
+import com.github.pagehelper.PageHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -102,6 +103,14 @@ public class AppTest
         for (UserEntity userEntity : userEntities){
             logger.info("============={}",userEntity);
         }
+    }
+
+    @Test
+    public void pageHelperTest(){
+//        PageHelper.offsetPage(1,8);
+        PageHelper.startPage(2,8);
+        List<UserEntity> userEntities = userMapper.selectAll();
+        logger.info("分页查询结果:{}",userEntities);
     }
 
     @Test

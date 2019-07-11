@@ -59,13 +59,33 @@
         <property name="dataSource" ref="dataSource" />
         <property name="typeAliasesPackage" value="com.crady.entity" />
         <property name="mapperLocations" value="classpath:sqlmapper/*.xml" />
-        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+       <!-- <property name="configLocation" value="classpath:mybatis-config.xml"/>-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>helperDialect = mysql</value>
+                    </property>
+                </bean>
+                <bean class="com.crady.interceptor.SlowSqlInterceptor">
+                    <property name="properties">
+                        <value>threshold = 20</value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
-    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <!--批量配置 DAO接口所在包名，Spring会自动查找其下的类-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.crady.mapper" />
     </bean>
-
+    <!--单个配置 DAO接口中的类-->
+<!--
+    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.crady.mapper.UserMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+-->
 
 
     <!-- (事务管理)transaction manager -->

@@ -30,6 +30,14 @@ public class OriginTest {
         sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis-origin-config.xml"));
     }
 
+    @Test
+    public void simpleQueryTest(){
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        List<UserEntity> userEntities = userMapper.selectAll();
+        logger.info("查询全部列表结果集:{}",userEntities);
+    }
+
     /**
      * 一级缓存测试，sqlSession级别
      * @throws IOException
