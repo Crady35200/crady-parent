@@ -21,6 +21,14 @@
         默认false（在 3.4.1 及之前的版本默认值为 true）-->
         <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
+    <plugins>
+        <plugin interceptor="com.crady.interceptor.SlowSqlInterceptor">
+            <property name="threshold" value="20"/>
+        </plugin>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
 <!--
     &lt;!&ndash; Continue editing here &ndash;&gt;
     <environments default="development">

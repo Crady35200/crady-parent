@@ -6,6 +6,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +23,19 @@ import java.util.List;
  **/
 public class OriginTest {
     Logger logger = LoggerFactory.getLogger(OriginTest.class);
+    private SqlSessionFactory sqlSessionFactory;
 
-    public SqlSessionFactory getSqlSessionFactory() throws IOException {
-        SqlSessionFactory build = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis-origin-config.xml"));
-        return build;
+    @Before
+    public void getSqlSessionFactory() throws IOException {
+        sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis-origin-config.xml"));
+    }
+
+    @Test
+    public void simpleQueryTest(){
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        List<UserEntity> userEntities = userMapper.selectAll();
+        logger.info("查询全部列表结果集:{}",userEntities);
     }
 
     /**
@@ -34,7 +44,6 @@ public class OriginTest {
      */
     @Test
     public void cacheOneLevelTest() throws IOException {
-        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
         UserMapper userMapper= sqlSession.getMapper(UserMapper.class);
         List<UserEntity> userEntities1 = userMapper.selectAll();
@@ -58,7 +67,6 @@ public class OriginTest {
      */
     @Test
     public void cacheTwoLevelTest() throws IOException {
-        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
         SqlSession sqlSession1 = sqlSessionFactory.openSession(true);
         UserMapper userMapper1= sqlSession1.getMapper(UserMapper.class);
         List<UserEntity> userEntities1 = userMapper1.selectAll();
