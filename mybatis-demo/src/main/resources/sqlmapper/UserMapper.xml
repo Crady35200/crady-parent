@@ -28,7 +28,6 @@
 
   <!--嵌套sql查询(1:1)-->
   <resultMap id="userAccountMap2" type="com.crady.entity.UserEntity" extends="BaseResultMap">
-    <!-- 此处也可以不是使用 javaType而使用 resultMap="com.crady.mapper.UserAccountMapper.BaseResultMap"代替-->
     <association property="userAccountEntity" column="id" fetchType="lazy"
                  select="com.crady.mapper.UserAccountMapper.selectByUserId"/>
   </resultMap>
@@ -46,7 +45,6 @@
 
   <!--嵌套sql查询(1:N)-->
   <resultMap id="userJobMap2" type="com.crady.entity.UserEntity" extends="BaseResultMap">
-    <!-- 此处也可以不是使用 javaType而使用 resultMap="com.crady.mapper.UserAccountMapper.BaseResultMap"代替-->
     <collection property="jobEntities" column="id" fetchType="lazy"
                 select="com.crady.mapper.JobMapper.selectByUserId"/>
   </resultMap>
