@@ -7,7 +7,9 @@ import static org.junit.Assert.*;
 /**
  * @author :Crady
  * date :2019/7/17 16:58
- * desc :装饰器模式主要有两个个角色，被装饰者(包含接口和实现)，装饰器(包含抽象类和实现,如果确定只有一个装饰类，则可以不需要抽象类)
+ * desc :装饰器模式主要只为了增强被装饰着功能，有四个角色，被装饰者接口或者抽象类，被装饰者实现类，
+ * 装饰着接口或抽象类，装饰者实现类
+ * JDK中的InputStream,OutputStream,Reader,Writer接口，还有Mybatis中的缓存都是装饰器中的经典应用。
  **/
 public class DecoratorTest {
 
