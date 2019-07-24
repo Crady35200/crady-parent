@@ -4,6 +4,7 @@ package com.crady.jvm;
  * @author :Crady
  * date :2019/7/19 17:17
  * desc :
+ * VM Args:-Xms5m -Xmx5m -Xmn2m -XX:+PrintGCDetails  -XX:+UseSerialGC
  **/
 public class JInfoDemo {
 
