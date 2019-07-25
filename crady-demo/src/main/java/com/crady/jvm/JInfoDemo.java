@@ -4,7 +4,8 @@ package com.crady.jvm;
  * @author :Crady
  * date :2019/7/19 17:17
  * desc :
- * VM Args:-Xms5m -Xmx5m -Xmn2m -XX:+PrintGCDetails  -XX:+UseSerialGC
+ * VM Args:-Xms5m -Xmx5m -Xmn2m -XX:+PrintGC
+ * 动态修改虚拟机参数 jinfo -flag +PrintGCDetails 19512
  **/
 public class JInfoDemo {
 
