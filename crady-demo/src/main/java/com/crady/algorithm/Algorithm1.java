@@ -1,5 +1,7 @@
 package com.crady.algorithm;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * author:Crady
  * date:2019/07/25 20:23
@@ -7,13 +9,26 @@ package com.crady.algorithm;
  **/
 public class Algorithm1 {
     public static void main(String[] args) {
+
         Integer [] array = new Integer[]{1,2,3,5,6,5,3,0,0};
         System.out.println("******************方法一**************************");
+        long start1 = System.nanoTime();
         isArrayContainsRepeatElement(array);
+        long end1 = System.nanoTime();
+        System.out.println("耗时：" + (end1 - start1) + "ns");
+
+
         System.out.println("******************方法二**************************");
+        long start2 = System.nanoTime();
         isArrayContainsRepeatElement2(array);
+        long end2 = System.nanoTime();
+        System.out.println("耗时：" + (end2 - start2) + "ms");
+
         System.out.println("******************方法三**************************");
+        long start3 = System.nanoTime();
         isArrayContainsRepeatElement3(array);
+        long end3 = System.nanoTime();
+        System.out.println("耗时：" + (end3 - start3) + "ms");
     }
 
     /**
@@ -42,6 +57,9 @@ public class Algorithm1 {
      * @return
      */
     public static boolean isArrayContainsRepeatElement2(Integer [] array){
+        if(array == null || array.length < 1){
+            throw new RuntimeException("array must not be null");
+        }
         boolean flag = false;
         int tmp;
         for (int i = 0; i < array.length; i++) {
@@ -65,10 +83,15 @@ public class Algorithm1 {
 
     /**
      * 时间O(n)，空间O(1)  能处理0~n-1的数
+     * 思路：遍历数字，对于下标为i的元素，对应值为index=array[i],设置array[index]的值为原值加上数组长度
+     * 如果遍历等到某个下标为i,而且array[index] > n则说明是第二次访问该元素，找到重复元素
      * @param array
      * @return
      */
     public static boolean isArrayContainsRepeatElement3(Integer [] array){
+        if(array == null || array.length < 1){
+            throw new RuntimeException("array must not be null");
+        }
         boolean flag = false;
         int length = array.length;
         for (int i = 0; i < length; i++) {
