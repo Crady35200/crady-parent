@@ -15,9 +15,10 @@
       <module>mq-activemq</module>
       <module>springboot-demo</module>
       <module>mybatis-demo</module>
-    <module>springcloud-parent</module>
       <module>spring-demo</module>
       <module>mybatis-demo</module>
+      <module>springmvc-demo</module>
+      <module>crady-mvc</module>
 
   </modules>
 
