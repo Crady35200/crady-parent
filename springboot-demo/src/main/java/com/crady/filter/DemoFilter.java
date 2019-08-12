@@ -1,4 +1,4 @@
-package com.crady.boot.springbootdemo.filter;
+package com.crady.filter;
 
 import org.springframework.core.annotation.Order;
 
@@ -12,7 +12,7 @@ import java.io.IOException;
  * desc:
  **/
 @Order(1)
-@WebFilter(urlPatterns = "/*",filterName = "demoFilter")
+@WebFilter(urlPatterns = "/demo/*",filterName = "demoFilter")
 public class DemoFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

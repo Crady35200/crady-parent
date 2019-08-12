@@ -1,4 +1,4 @@
-package com.crady.boot.springbootdemo;
+package com.crady;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

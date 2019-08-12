@@ -1,4 +1,4 @@
-package com.crady.boot.springbootdemo.interceptor;
+package com.crady.interceptor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -9,24 +9,24 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * author:Crady
- * date:2019/1/24 10:29
+ * date:2019/1/24 10:04
  * desc:
  **/
-@Component("aInterceptor")
-public class AInterceptor  implements HandlerInterceptor {
+@Component("demoInterceptor")
+public class DemoInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("**********AInterceptor preHandle invok...");
+        System.out.println("**********DemoInterceptor preHandle invok...");
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        System.out.println("**********AInterceptor postHandle invok...");
+        System.out.println("**********DemoInterceptor postHandle invok...");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        System.out.println("**********AInterceptor afterCompletion invok...");
+        System.out.println("**********DemoInterceptor afterCompletion invok...");
     }
 }

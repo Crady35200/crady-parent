@@ -1,4 +1,4 @@
-package com.crady.boot.springbootdemo.performance;
+package com.crady.performance;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
