@@ -6,7 +6,7 @@
     <settings>
         <!-- Globally enables or disables any caches configured in any mapper under this configuration -->
         <!--二级缓存的全局开关，如果此处设置为false则后面小开关打开也没有用-->
-        <setting name="cacheEnabled" value="true"/>
+        <setting name="cacheEnabled" value="false"/>
         <!-- Sets the number of seconds the driver will wait for a response from the database -->
         <setting name="defaultStatementTimeout" value="5"/>
         <!-- Enables automatic mapping from classic database column names A_COLUMN to camel case classic Java property names aColumn -->
