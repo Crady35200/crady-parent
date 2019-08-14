@@ -1,7 +1,6 @@
 package com.crady.service;
 
 import com.crady.pojo.User;
-import org.apache.ibatis.plugin.Intercepts;
 
 import java.util.List;
 
@@ -17,5 +16,9 @@ public interface IUserService {
     User queryUserById(Integer id);
 
     List<User> queryAllUsers();
+
+    void updateUser(User user);
+
+    User updateUserNameById(Integer id,String name);
 
 }

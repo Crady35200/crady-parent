@@ -20,6 +20,32 @@ spring:
             max-pool-prepared-statement-per-connection-size: 20
             #最小空闲连接
             min-idle: 1
+    redis:
+        host: 192.168.221.188
+        port: 6379
+        password: foobared
+        #redis超时时间,单位毫秒
+        timeout: 1000
+        jedis:
+            #连接池配置
+            pool:
+                min-idle: 1
+                max-idle: 8
+                max-active: 8
+                max-wait: 2000
+    #缓存管理器配置，缓存注解使用
+    cache:
+        type: redis
+        cache-names: redisCache
+        redis:
+            #是否允许redis缓存空值
+            cache-null-values: true
+            #是否启用键值前缀
+            use-key-prefix: true
+            #键值前缀
+            key-prefix:
+            #缓存超时时间戳，配置0为不设置超时时间
+            time-to-live: 0
 #mybatis配置
 mybatis:
     mapper-locations: classpath:sqlmapper/*.xml
@@ -28,12 +54,14 @@ mybatis:
         aggressive-lazy-loading: true
         #执行器类型
         default-executor-type: simple
+
 #分页插件
 pagehelper:
     #数据库类型
     helper-dialect: mysql
     #合理化参数设置reasonable，如果pageNum<0时查询第一页，大于最大一页时查询最后一页
     reasonable: true
+
 logging:
     level:
         com.crady: debug

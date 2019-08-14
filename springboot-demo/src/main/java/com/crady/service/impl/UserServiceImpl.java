@@ -4,6 +4,8 @@ import com.crady.mapper.UserMapper;
 import com.crady.pojo.User;
 import com.crady.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +31,7 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
+    @Cacheable(value = "redisCache",key = "'user_' + #id")
     @Override
     public User queryUserById(Integer id) {
         if(id != null){
@@ -37,8 +40,24 @@ public class UserServiceImpl implements IUserService {
         return null;
     }
 
+    @CachePut
     @Override
     public List<User> queryAllUsers() {
         return userMapper.selectAll();
+    }
+
+    @Override
+    public void updateUser(User user) {
+        if(null != user && user.getId() != null){
+            userMapper.updateByPrimaryKeySelective(user);
+        }
+    }
+
+    @Override
+    public User updateUserNameById(Integer id, String name) {
+        User user = this.queryUserById(id);
+        user.setName(name);
+        this.updateUser(user);
+        return user;
     }
 }
