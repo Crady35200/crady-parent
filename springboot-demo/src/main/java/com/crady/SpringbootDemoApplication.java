@@ -26,6 +26,7 @@ import java.util.Properties;
 @Slf4j
 @SpringBootApplication
 @EnableCaching
+//@EnableScheduling
 @MapperScan(basePackages = "com.crady.mapper",annotationClass = Repository.class)
 @ServletComponentScan(basePackages = "com.crady.filter")
 public class SpringbootDemoApplication implements WebMvcConfigurer {

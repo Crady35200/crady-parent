@@ -12,6 +12,7 @@
     <artifactId>springboot-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-demo</name>
+    <packaging>war</packaging>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -70,6 +71,12 @@
             <version>2.9.0</version>
         </dependency>
         <!--redis配置end-->
+
+        <!--springboot项目监控-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
