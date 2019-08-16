@@ -1,0 +1,30 @@
+@startuml
+title Redis主从复制原理
+note left: "开始"
+(*)  --> "salve连接master"
+If "slave是否持有上次同步\n(master_replid,master_replid_offset)" then
+partition 部分同步 {
+--> [Yes] "slave请求部分同步"
+If "master是否接受部分同步" then
+--> [Yes] "部分同步"
+--> "master将缓冲区的命令发送给slave"
+--> "slave执行命令实现部分同步"
+}
+--> (*)
+else
+partition 完全同步 {
+--> [No] "完全同步"
+--> "master异步转储RDB文件"
+--> "master发送RDB文件到slave"
+--> "slave执行RDB文件实现完全同步"
+}
+--> (*)
+note left:"结束"
+Endif
+else
+partition 完全同步 {
+--> [No] "slave请求完全同步"
+--> "master异步转储RDB文件"
+}
+Endif
+@enduml
