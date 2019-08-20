@@ -23,6 +23,7 @@ gen
 */target/
 
 ### Compiled class file ###
+classes/
 *.class
 
 ### Log file ###

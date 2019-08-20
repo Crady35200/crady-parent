@@ -10,6 +10,6 @@
             </props>
         </property>
     </bean>
-    <bean id="userController" class="com.crady.framework.controller.UserController"/>
+    <bean id="userController" class="com.crady.controller.UserController"/>
 
 </beans>

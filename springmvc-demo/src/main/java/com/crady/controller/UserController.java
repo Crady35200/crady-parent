@@ -1,6 +1,7 @@
-package com.crady.framework.controller;
+package com.crady.controller;
 
-import com.crady.framework.bean.User;
+import com.crady.bean.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * date:2019/08/07 23:26
  * desc:
  **/
+@Slf4j
 public class UserController extends AbstractController {
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -32,6 +34,7 @@ public class UserController extends AbstractController {
 System.out.println("**********************=" + users);
 //request.getRequestDispatcher("WEB-INF/jsp/userList.jsp").forward(request,response);
 //System.out.println("***********==============***********=");
+        log.info("**************getServletContext().getAttribute(\"title\")={}",getServletContext().getAttribute("title"));
         request.setAttribute("us",users);
         return new ModelAndView("userList","users",users);
     }
