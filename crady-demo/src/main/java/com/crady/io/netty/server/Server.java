@@ -1,4 +1,4 @@
-package com.crady.netty.server;
+package com.crady.io.netty.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

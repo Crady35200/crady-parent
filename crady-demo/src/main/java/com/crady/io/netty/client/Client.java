@@ -1,4 +1,4 @@
-package com.crady.netty.client;
+package com.crady.io.netty.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.EventLoopGroup;

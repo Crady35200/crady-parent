@@ -10,7 +10,6 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
       <module>design-pattern</module>
-      <module>thread-concurrent</module>
       <module>crady-demo</module>
       <module>mq-activemq</module>
       <module>springboot-demo</module>
@@ -19,7 +18,6 @@
       <module>mybatis-demo</module>
       <module>springmvc-demo</module>
       <module>crady-mvc</module>
-      <module>io-demo</module>
 
   </modules>
 

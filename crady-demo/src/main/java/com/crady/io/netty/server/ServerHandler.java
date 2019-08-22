@@ -1,4 +1,4 @@
-package com.crady.netty.server;
+package com.crady.io.netty.server;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
