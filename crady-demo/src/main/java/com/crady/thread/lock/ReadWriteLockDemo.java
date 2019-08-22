@@ -1,4 +1,4 @@
-package com.crady.lock;
+package com.crady.thread.lock;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;

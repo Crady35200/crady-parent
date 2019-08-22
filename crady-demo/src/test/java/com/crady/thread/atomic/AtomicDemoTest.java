@@ -1,4 +1,4 @@
-package com.crady.atomic;
+package com.crady.thread.atomic;
 
 import org.junit.Test;
 
@@ -6,17 +6,13 @@ import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Exchanger;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static org.junit.Assert.*;
 
 /**
  * author:Crady
- * date:2019/1/8 10:40
- * desc: 并发工具  Atomic、CountDownlatch、CyclicBarrier、Semaphore、Exchanger应用
+ * date:2019/08/22 21:02
+ * desc:
  **/
 public class AtomicDemoTest {
-
     @Test
     public void atomicDemoTest(){
         for (int i = 0; i < 10; i++) {

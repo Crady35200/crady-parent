@@ -1,4 +1,4 @@
-package com.crady.deadlock;
+package com.crady.thread.deadlock;
 
 import java.util.concurrent.TimeUnit;
 

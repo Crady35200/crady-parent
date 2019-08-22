@@ -1,4 +1,4 @@
-package com.crady.threadpool;
+package com.crady.thread.threadpool;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

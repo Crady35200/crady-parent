@@ -1,4 +1,4 @@
-package com.crady.atomic;
+package com.crady.thread.atomic;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
