@@ -7,7 +7,9 @@ import java.util.concurrent.FutureTask;
 /**
  * author:Crady
  * date:2019/08/22 20:50
- * desc:
+ * desc:使用Callable创建线程
+ * 优点：通过接口创建，可以有返回值
+ * 缺点：创建相比Thread和Runnable稍显复杂
  **/
 public class CallableDemo implements Callable<String> {
     @Override

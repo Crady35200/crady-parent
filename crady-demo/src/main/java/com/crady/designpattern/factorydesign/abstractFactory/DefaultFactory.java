@@ -1,7 +1,7 @@
 package com.crady.designpattern.factorydesign.abstractFactory;
 
-import com.crady.factorydesign.Car;
-import com.crady.factorydesign.factoryMethod.BenzFactory;
+import com.crady.designpattern.factorydesign.Car;
+import com.crady.designpattern.factorydesign.factoryMethod.BenzFactory;
 
 /**
  * author:Crady
