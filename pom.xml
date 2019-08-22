@@ -9,7 +9,6 @@
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <modules>
-      <module>design-pattern</module>
       <module>crady-demo</module>
       <module>mq-activemq</module>
       <module>springboot-demo</module>
