@@ -32,18 +32,12 @@ public class ThreadPoolDemo {
             e.printStackTrace();
         }
 
-
-        String result = null;
-        FutureTask<String> f = new FutureTask<>(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                String s = Thread.currentThread().getName() + " is run... Future Tashk mode";
-                System.out.println(s);
-                return s;
-            }
+        FutureTask<String> f = new FutureTask<>(() -> {
+            String s = Thread.currentThread().getName() + " is run... Future Tashk mode";
+            System.out.println(s);
+            return s;
         });
 
-        Future<String> submit1 = executorService.submit(f, result);
         try {
             System.out.println(Thread.currentThread().getName() + " Future Task:" + f.get());
         } catch (InterruptedException e) {
