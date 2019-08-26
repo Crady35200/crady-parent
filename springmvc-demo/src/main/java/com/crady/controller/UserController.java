@@ -2,8 +2,9 @@ package com.crady.controller;
 
 import com.crady.bean.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.AbstractController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +17,12 @@ import java.util.List;
  * desc:
  **/
 @Slf4j
-public class UserController extends AbstractController {
-    @Override
-    protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+@Controller
+//@RequestMapping("/user")
+public class UserController{
+
+    @RequestMapping(value = "/userList")
+    public ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<User> users = new ArrayList<>();
         User u1 = new User();
         u1.setId(1);
@@ -32,10 +36,13 @@ public class UserController extends AbstractController {
         u2.setAge(20);
         users.add(u2);
 System.out.println("**********************=" + users);
-//request.getRequestDispatcher("WEB-INF/jsp/userList.jsp").forward(request,response);
+//request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp").forward(request,response);
 //System.out.println("***********==============***********=");
-        log.info("**************getServletContext().getAttribute(\"title\")={}",getServletContext().getAttribute("title"));
+//        log.info("**************getServletContext().getAttribute(\"title\")={}", RequestContextHolder.getServletContext().getAttribute("title"));
         request.setAttribute("us",users);
-        return new ModelAndView("userList","users",users);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("userList");
+        modelAndView.addObject("us",users);
+        return modelAndView;
     }
 }

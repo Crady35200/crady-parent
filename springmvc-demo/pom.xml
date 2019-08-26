@@ -107,4 +107,29 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <!--使用jetty插件运行-->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.9.v20180320</version>
+                <!-- Config: contextPath and Port (Default:8080) -->
+                <configuration>
+                    <httpConnector>
+                        <!--port,jetty服务器的端口号-->
+                        <port>8080</port>
+                        <!--host,jetty服务器监听的地址-->
+                        <host>localhost</host>
+                    </httpConnector>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                    </webAppConfig>
+                    <!--scanIntervalSeconds。扫描进行热部署的间隔时间-->
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
