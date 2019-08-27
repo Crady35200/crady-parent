@@ -20,8 +20,6 @@
     <!-- 访问静态资源,如js, css文件等 -->
     <!--<mvc:default-servlet-handler />-->
 
-
-
  <!--   <bean id="simpleUrlMapper" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>

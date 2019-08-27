@@ -4,7 +4,6 @@ import com.crady.bean.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,11 +17,11 @@ import java.util.List;
  **/
 @Slf4j
 @Controller
-//@RequestMapping("/user")
+@RequestMapping("/user")
 public class UserController{
 
     @RequestMapping(value = "/userList")
-    public ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<User> users = new ArrayList<>();
         User u1 = new User();
         u1.setId(1);
@@ -38,11 +37,8 @@ public class UserController{
 System.out.println("**********************=" + users);
 //request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp").forward(request,response);
 //System.out.println("***********==============***********=");
-//        log.info("**************getServletContext().getAttribute(\"title\")={}", RequestContextHolder.getServletContext().getAttribute("title"));
-        request.setAttribute("us",users);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("userList");
-        modelAndView.addObject("us",users);
-        return modelAndView;
+        log.info("**************getServletContext().getAttribute(\"title\")={}", request.getSession().getServletContext().getAttribute("title"));
+        request.setAttribute("users",users);
+        return "userList";
     }
 }

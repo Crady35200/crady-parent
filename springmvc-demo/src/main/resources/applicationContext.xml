@@ -6,8 +6,4 @@
 
     <!--激活@Required、@Autowired、JSR 250's、@PostConstruct等标注-->
     <context:annotation-config/>
-<!--    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>-->
 </beans>
