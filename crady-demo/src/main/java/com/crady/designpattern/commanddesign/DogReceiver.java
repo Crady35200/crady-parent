@@ -5,8 +5,9 @@ package com.crady.designpattern.commanddesign;
  * date:2019/1/18 15:38
  * desc:
  **/
-public class Executor {
+public class DogReceiver implements Receiver{
+    @Override
     public void exec(){
-        System.out.println("Executor do sth");
+        System.out.println("DogReceiver do sth");
     }
 }

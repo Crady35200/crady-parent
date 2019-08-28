@@ -6,9 +6,9 @@ package com.crady.designpattern.commanddesign;
  * desc:
  **/
 public class MyCommand implements Command {
-    private Executor executor;
+    private Receiver executor;
 
-    public MyCommand(Executor executor) {
+    public MyCommand(Receiver executor) {
         this.executor = executor;
     }
 
