@@ -1,0 +1,41 @@
+@startuml
+title kafka分区节点选举流程
+start
+:节点故障;
+:根据故障类型选择选举策略;
+if (创建分区或者分区上线) then (yes)
+    :OfflinePartitionLeaderElectionStrategy;
+elseif (分区重新分配) then (yes)
+    :ReassignPartitionLeaderElectionStrategy;
+elseif (优先副本选举) then (yes)
+    :PreferredReplicaPartitionLeaderElectionStrategy;
+    :设置优先副本为新的Master节点;
+stop
+elseif (节点优雅关闭) then (yes)
+    :ControlledShutdownPartitionLeaderElectionStrategy;
+endif
+
+if(ISR是否有可用的副本) then (yes)
+    repeat
+    :按顺序查找AR列表节点;
+    if(节点在ISR列表当中) then (yes)
+       :找到第一个设置为新的Mater节点;
+       :选举成功;
+       stop
+    else (no)
+    endif
+    repeat while (AR列表中还有没有遍历的节点);
+else(no)
+    if(是否允许非ISR列表中节点参与选举) then (yes)
+        :按顺序查找AR中的副本;
+        :找到第一个存活的作为Master节点;
+        :选举成功;
+        stop
+    else(no)
+        :选举失败;
+        stop;
+    endif
+endif
+:选举失败;
+stop
+@enduml
