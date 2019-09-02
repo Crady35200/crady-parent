@@ -21,7 +21,7 @@ spring:
             #最小空闲连接
             min-idle: 1
     redis:
-        host: 192.168.221.188
+        host: 192.168.8.245
         port: 6379
         password: foobared
         #redis超时时间,单位毫秒
