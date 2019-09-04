@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 级别从高到低 OFF 、 FATAL 、 ERROR 、 WARN 、 INFO 、 DEBUG 、 TRACE 、 ALL -->
+<!-- 日志输出规则 根据当前ROOT 级别，日志输出时，级别高于root默认的级别时 会输出 -->
+<!-- 以下 每个配置的 filter 是过滤掉输出文件里面，会出现高级别文件，依然出现低级别的日志信息，通过filter 过滤只记录本级别的日志 -->
+<!-- scan 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。 -->
+<!-- scanPeriod 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。 -->
+<!-- debug 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
+<configuration debug="false">
+
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN" value="[%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint}] [%clr(%5p)] [%clr(${PID:- })] %clr([%t]){magenta} %clr(-){faint}%clr(%logger){cyan}%clr(.%M){magenta} [%L] %clr(:){faint} %m%n - %wex"/>
+    <property name="FILE_LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%5p] [${PID:- }] [%t] -%logger.%M [%L] : %m%n%wex"/>
+
+    <property name="LOG_HOME" value="logs" />
+    <!--多环境的日志输出-->
+    <!--根据不同环境（prod:生产环境，test:测试环境，dev:开发环境）来定义不同的日志输出，-->
+    <!--在 logback-spring.xml中使用 springProfile 节点来定义，方法如下：-->
+<!--    <springProfile name="prod">
+        <property name="LOG_HOME" value="/logs" />
+    </springProfile>
+    <springProfile name="stg">
+        <property name="LOG_HOME" value="/logs" />
+    </springProfile>
+    <springProfile name="dev">
+        <property name="LOG_HOME" value="/logs" />
+    </springProfile>
+    <springProfile name="pre">
+        <property name="LOG_HOME" value="/logs" />
+    </springProfile>-->
+
+    <!--输出到控制台-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <!--info 级别的日志-->
+    <!-- 按照每天生成日志文件 -->
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+            <!--日志文件输出的文件名-->
+            <fileNamePattern>${LOG_HOME}/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!--设置单个文件大小时使用-->
+            <!--<fileNamePattern>${SYS_LOG_DIR}/%d{yyyy-MM-dd}/${LOG_FILE}_%d{yyyy-MM-dd}_%i.zip</fileNamePattern>-->
+            <!--单个log文件超过该大小就会重新建一个log文件-->
+            <!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                           <maxFileSize>50MB</maxFileSize>
+                        </timeBasedFileNamingAndTriggeringPolicy>-->
+
+            <!-- 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件假设设置每个月滚动，且<maxHistory>是6， 则只保存最近6个月的文件，删除之前的旧文件。注意，删除旧文件是，那些为了归档而创建的目录也会被删除 -->
+            <!--<maxHistory>100</maxHistory>-->
+            <!--日志文件保留天数-->
+            <!--<MaxHistory>30</MaxHistory>-->
+        </rollingPolicy>
+
+        <!--日志文件最大的大小-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+    <!--把日志发送到logstash-->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!--指定logstash ip：监听端口 tcpAppender  可自己实现如kafka传输等-->
+        <destination>192.168.221.188:9600</destination>
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+<!--debug 级别的日志-->
+    <!-- 按照每天生成日志文件 -->
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+            <!--日志文件输出的文件名-->
+            <fileNamePattern>${LOG_HOME}/debug.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!--设置单个文件大小时使用-->
+            <!--<fileNamePattern>${SYS_LOG_DIR}/%d{yyyy-MM-dd}/${LOG_FILE}_%d{yyyy-MM-dd}_%i.zip</fileNamePattern>-->
+            <!--单个log文件超过该大小就会重新建一个log文件-->
+            <!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                           <maxFileSize>50MB</maxFileSize>
+                        </timeBasedFileNamingAndTriggeringPolicy>-->
+
+            <!-- 可选节点，控制保留的归档文件的最大数量，超出数量就删除旧文件假设设置每个月滚动，且<maxHistory>是6， 则只保存最近6个月的文件，删除之前的旧文件。注意，删除旧文件是，那些为了归档而创建的目录也会被删除 -->
+            <!--<maxHistory>100</maxHistory>-->
+            <!--日志文件保留天数-->
+            <!--<MaxHistory>30</MaxHistory>-->
+        </rollingPolicy>
+
+        <!--日志文件最大的大小-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>100MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+
+
+    <!--WARN 级别的日志-->
+    <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/warn.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--<MaxHistory>30</MaxHistory>-->
+        </rollingPolicy>
+    </appender>
+
+    <!--ERROR 级别的日志-->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--<MaxHistory>30</MaxHistory>-->
+        </rollingPolicy>
+    </appender>
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="LOGSTASH"/>
+<!--        <appender-ref ref="DEBUG"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>-->
+    </root>
+    <!--指定包日志级别-->
+    <!--
+    additivity它是 子Logger 是否继承 父Logger 的 输出源（appender） 的标志位。具体说，
+    默认情况下子Logger会继承父Logger的appender，也就是说子Logger会在父Logger的appender里输出。
+    若是additivity设为false，则子Logger只会在自己的appender里输出，而不会在父Logger的appender里输出。
+    -->
+    <logger name="com.crady.user" level="DEBUG" additivity="true"/>
+    <logger name="org.springframework.cloud.sleuth" level="DEBUG" additivity="true"/>
+</configuration>
