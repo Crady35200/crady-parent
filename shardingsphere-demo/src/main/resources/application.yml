@@ -1,0 +1,14 @@
+server:
+    port: 8099
+mybatis:
+    mapper-locations: classpath:sqlmapper/*.xml
+    configuration:
+        aggressive-lazy-loading: true
+        default-executor-type: simple
+spring:
+    profiles:
+        active: sharding-databases
+#logging:
+#    level:
+#        org.springframework: debug
+#        org.mybatis: debug
