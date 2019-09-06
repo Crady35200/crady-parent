@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -26,6 +27,7 @@ import java.util.Properties;
 @Slf4j
 @SpringBootApplication
 @EnableCaching
+@EnableAsync
 //@EnableScheduling
 @MapperScan(basePackages = "com.crady.mapper",annotationClass = Repository.class)
 @ServletComponentScan(basePackages = "com.crady.filter")
