@@ -1,0 +1,61 @@
+spring:
+    shardingsphere:
+        datasource:
+            #数据源名称，多数据源以逗号分隔
+            names: ds-0,ds-1
+            ds-0:
+                #数据库驱动类名
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                #数据库url连接
+                jdbc-url: jdbc:mysql://192.168.8.245:3306/demo_ds_0?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+                #数据库用户名
+                username: root
+                #数据库密码
+                password: a123321
+                #数据库连接池类名称
+                type: com.zaxxer.hikari.HikariDataSource
+            ds-1:
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                jdbc-url: jdbc:mysql://192.168.8.244:3306/demo_ds_1?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+                username: root
+                password: jrl!123
+                type: com.zaxxer.hikari.HikariDataSource
+        sharding:
+            binding-tables: t_order,t_order_item
+            broadcast-tables: t_address
+            default-database-strategy:
+                inline:
+                    algorithm-expression: ds-$->{user_id % 2}
+                    sharding-column: user_id
+            tables:
+                t_order:
+                    actual-data-nodes: ds-$->{0..1}.t_order_$->{0..1}
+                    key-generator:
+                        column: order_id
+                        props:
+                            worker:
+                                id: 123
+                        type: SNOWFLAKE
+                    table-strategy:
+                        inline:
+                            sharding-column: order_id
+                            algorithm-expression: t_order_$->{order_id % 2}
+                t_order_item:
+                    actual-data-nodes: ds-$->{0..1}.t_order_item_$->{0..1}
+                    key-generator:
+                        column: order_item_id
+                        props:
+                            worker:
+                                id: 123
+                        type: SNOWFLAKE
+                    table-strategy:
+                        inline:
+                            sharding-column: order_id
+                            algorithm-expression: t_order_item_$->{order_id % 2}
+        props:
+            sql:
+                #显示sql语句
+                show: true
+            executor:
+                #工作线程数量，默认值: CPU核数
+                size: 4
