@@ -1,12 +1,7 @@
 package com.crady.jvm;
 
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.cglib.proxy.MethodInterceptor;
-import org.springframework.cglib.proxy.MethodProxy;
-
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
 
 /**
  * @author :Crady
