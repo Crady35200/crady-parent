@@ -17,6 +17,7 @@
       <module>springmvc-demo</module>
       <module>crady-mvc</module>
       <module>shardingsphere-demo</module>
+      <module>springboot-es</module>
 
   </modules>
 
