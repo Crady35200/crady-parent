@@ -10,9 +10,11 @@ public class SortMethod {
     public static void main(String[] args) {
         int [] array = new int[]{2,3,4,5,6,7};
 //        int [] array = new int[]{2,8,7,18,9,3,6,12,11,15};
-        bubbleSort(array);
+//        bubbleSort(array);
 //        bubbleSort2(array);
 //        selectSort(array);
+        quickSort(array,0,array.length - 1);
+        print(array);
     }
 
     /**
@@ -113,10 +115,57 @@ public class SortMethod {
         print(array);
     }
 
+    /**
+     * 1、默认取第一个数作为基准。
+     * 2、从最右边向左搜索比基准小的记录array[h]。
+     * 3、从最左边向右搜索比基准大的记录array[l]。
+     * 4、如果h>l则交换两者值。
+     * 5、如果l=h则想换l和基准的值。
+     * 6、进行新的一轮比较。
+     * 时间复杂度：平均时间复杂度：O(nlogn)  最好:O(nlogn)  最坏:O(n~2)
+     * 空间复杂度：O(logn)
+     * 稳定性：不稳定
+     * @param array
+     * @param low
+     * @param high
+     */
+    public static void quickSort(int [] array,int low,int high){
+        if(array == null || array.length < 1){
+            return;
+        }
+        if(high < low){
+            return;
+        }
+        int k = array[low];
+        int l = low;
+        int h = high;
+        int tmp;
+        while (l < h){
+
+            while(l < h && array[h] >= k){
+                h --;
+            }
+            while(l < h && array[l] <= k){
+                l ++;
+            }
+            if(l < h){
+                tmp = array[l];
+                array[l] = array[h];
+                array[h] = tmp;
+            }
+        }
+        array[low] = array[l];
+        array[l] = k;
+        quickSort(array,low,h - 1);
+        quickSort(array,h + 1,high);
+
+    }
+
     public static void print(int [] array){
         for (int n : array) {
             System.out.print(n + ",");
         }
         System.out.println();
     }
+
 }
