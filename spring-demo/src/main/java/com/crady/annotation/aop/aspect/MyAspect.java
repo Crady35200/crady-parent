@@ -1,7 +1,6 @@
 package com.crady.annotation.aop.aspect;
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
@@ -18,7 +17,7 @@ public class MyAspect{
 
 
     @Pointcut("execution(* com.crady.annotation.aop..*(..))")
-    public void pointcut(){};
+    public void pointcut(){}
 
     @Before("pointcut()")
     public void before(){
