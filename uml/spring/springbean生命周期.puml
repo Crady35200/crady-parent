@@ -1,0 +1,27 @@
+@startuml
+title spring bean生命周期
+start
+note right:开始
+partition bean初始化 {
+:资源定位(@ComponentScan);
+:Bean定位(将Bean的定义保存到BeanDefinition中);
+:发布bean定位(Ioc容器装载Bean定义);
+:初始化(bean construct);
+:依赖注入;
+}
+partition 自定义过程 {
+:BeanNameAware:setBeanName;
+:BeanFactoryAware:setBeanFactory;
+:ApplicationContextAware:setApplicationContext;
+:BeanPostProcessor:postProcessBeforeInitialization;
+:JSR-250:postConstruct;
+:InitializingBean:afterPropertiesSet;
+:init method;
+:BeanPostProcessor:postProcessAfterInitialization;
+:JSR-250:preDestory;
+:DisposableBean:destory;
+:destory method;
+}
+stop
+note left:结束
+@enduml
