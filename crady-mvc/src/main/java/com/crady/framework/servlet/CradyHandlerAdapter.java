@@ -32,7 +32,7 @@ public class CradyHandlerAdapter {
             if (params.containsKey(entry.getKey())){
 //                ps.add(entry.getValue());
                 int i = params.get(entry.getKey());
-                ps[i] = casetStringValue(Arrays.toString(entry.getValue()).replaceAll("\\[|\\]",""),types[i]);
+                ps[i] = castStringValue(Arrays.toString(entry.getValue()).replaceAll("\\[|\\]",""),types[i]);
             }
         }
         String reqName = HttpServletRequest.class.getSimpleName();
@@ -50,7 +50,7 @@ public class CradyHandlerAdapter {
         return null;
     }
 
-    private Object casetStringValue(String value, Class<?> type) {
+    private Object castStringValue(String value, Class<?> type) {
         if(type == String.class){
             return value;
         }else if(type == Integer.class){
