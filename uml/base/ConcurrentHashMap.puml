@@ -1,0 +1,52 @@
+@startuml
+title ConcurrentHashMap-put流程
+start
+:获取hashcode;
+if(数组为空) then (yes)
+:初始化数组;
+elseif(放入位置没有数据)then(yes)
+:使用CAS插入数据;
+elseif(数组正在扩容)then(yes)
+:当前线程帮助一起扩容;
+else(当前位置存在数据)
+  :加同步锁(Synchronized);
+  if(如果是链表) then (yes)
+    if(要插入的数据是否已经存在)then(yes)
+      :替换旧的元素值;
+    else(不存在)
+      :把要插入的数据插入到链表最后;
+    endif
+  else(红黑树)
+    :插入红黑树;
+  endif
+  if(链表长度>=8&数组长度>=64)then(yes)
+    :当前位置链表结构转为红黑树;
+  endif
+endif
+:计数器+1;
+if(CAS获取扩容锁)then(yes)
+  :获取每个线程每次处理的步长(最小16);
+  :CAS获取每个线程每次处理的步长(最小16);
+  :初始化新的数组为旧数组的2倍;
+  :CAS获取当前线程处理的数组范围;
+  if(当前首节点为空)then(yes)
+    :CAS设置ForwardingNode节点(迁移完成标志);
+  elseif(当前数组节点处理完成)then(yes)
+    :处理其他数组节点;
+  elseif(前是最后一个迁移任务或出现扩容冲突)then(true)
+    :扩容完成;
+  else(处理当前数组节点)then(true)
+    if(获取当前数组首节点锁Synchronized)then(true)
+      if(当前数组节点为链表)then(true)
+         :把原链表数据节点复制到新节点i和i+len位置;
+      elseif(当前数组节点为红黑树)then(true)
+         :把原红黑树数据节点复制到新节点i和i+len位置;
+         if(红黑色数据节点<=6)then(true)
+           :把当前红黑树结构转为链表结构;
+         endif
+      endif
+    endif
+  endif
+endif
+stop
+@enduml
