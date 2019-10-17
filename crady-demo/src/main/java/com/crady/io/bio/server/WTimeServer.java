@@ -7,7 +7,7 @@ import java.net.Socket;
 /**
  * author:Crady
  * date:2019/10/17 20:31
- * desc: 韦异步IO
+ * desc: 伪异步IO
  **/
 public class WTimeServer {
 
