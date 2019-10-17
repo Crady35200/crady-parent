@@ -9,7 +9,7 @@ import java.util.Date;
  * date:2019/10/17 20:41
  * desc:
  **/
-public class TimeServerHandler extends Thread {
+public class TimeServerHandler implements Runnable {
     private Socket socket;
     public TimeServerHandler(Socket socket) {
         this.socket = socket;

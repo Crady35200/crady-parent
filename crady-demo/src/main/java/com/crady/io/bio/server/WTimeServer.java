@@ -7,21 +7,22 @@ import java.net.Socket;
 /**
  * author:Crady
  * date:2019/10/17 20:31
- * desc:阻塞IO
+ * desc: 韦异步IO
  **/
-public class TimeServer {
+public class WTimeServer {
 
     private static final int PORT = 8888;
 
     public static void main(String[] args) {
         ServerSocket serverSocket = null;
+        TimeServerHandlerExecutePool executor = new TimeServerHandlerExecutePool(10,100);
         try {
             serverSocket = new ServerSocket(PORT);
             System.out.println("serverSocket start on port: " + PORT);
             Socket socket = null;
             while(true){
                 socket = serverSocket.accept();
-                new Thread(new TimeServerHandler(socket)).start();
+                executor.execute(new TimeServerHandler(socket));
             }
         } catch (IOException e) {
             e.printStackTrace();
