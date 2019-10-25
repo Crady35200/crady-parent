@@ -1,4 +1,4 @@
-package com.crady.jvm;
+package com.crady.jvm.gc;
 
 import sun.misc.Unsafe;
 

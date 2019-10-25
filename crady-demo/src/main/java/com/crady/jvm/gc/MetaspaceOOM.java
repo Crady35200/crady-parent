@@ -1,4 +1,4 @@
-package com.crady.jvm;
+package com.crady.jvm.gc;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;

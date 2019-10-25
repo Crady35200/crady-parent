@@ -1,4 +1,4 @@
-package com.crady.jvm;
+package com.crady.jvm.gc;
 
 import java.util.ArrayList;
 import java.util.List;

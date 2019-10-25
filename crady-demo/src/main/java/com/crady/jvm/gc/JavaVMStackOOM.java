@@ -1,9 +1,9 @@
-package com.crady.jvm;
+package com.crady.jvm.gc;
 
 /**
  * @author :Crady
  * date :2019/7/19 15:11
- * desc : 模拟栈内存溢出 OOM
+ * desc : 模拟栈内存溢出 OOM(小心运行可能导致电脑死机)
  * VM Args : -Xss5m
  **/
 public class JavaVMStackOOM {
