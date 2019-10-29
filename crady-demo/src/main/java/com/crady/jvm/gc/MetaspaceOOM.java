@@ -7,7 +7,7 @@ import net.sf.cglib.proxy.MethodInterceptor;
  * @author :Crady
  * date :2019/7/19 15:41
  * desc :
- * JVM Args : -XX:MetaspaceSize=10m -XX:MaxMetaspaceSize=10m
+ * JVM Args : -XX:MetaspaceSize=10m -XX:MaxMetaspaceSize=10m -XX:+PrintGCDetails
  **/
 public class MetaspaceOOM {
 
