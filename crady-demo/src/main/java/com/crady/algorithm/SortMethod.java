@@ -13,8 +13,9 @@ public class SortMethod {
 //        bubbleSort(array);
 //        bubbleSort2(array);
 //        selectSort(array);
-        quickSort(array,0,array.length - 1);
-        print(array);
+//        quickSort(array,0,array.length - 1);
+        heapSort1(array);
+//        print(array);
     }
 
     /**
@@ -158,6 +159,101 @@ public class SortMethod {
         array[l] = k;
         quickSort(array,low,h - 1);
         quickSort(array,h + 1,high);
+
+    }
+
+    /**
+     * 堆排序：使用大顶堆做升序排序(递归实现)
+     * 排序规则：
+     * 1、先n个元素的无序序列，构建成大顶堆。
+     * 2、将根节点与最后一个元素交换位置，（将最大元素"沉"到数组末端）。
+     * 3、交换过后可能不再满足大顶堆的条件，所以需要将剩下的n-1个元素重新构建成大顶堆。
+     * 4、重复第2步、第3步直到整个数组排序完成
+     * @param array
+     */
+    public static void heapSort(int [] array){
+        if(array == null || array.length < 1){
+            return;
+        }
+        int tmp;
+        for (int i = array.length; i > 1; i--) {
+            buildBigHeap(array,i);
+            tmp = array[0];
+            array[0] = array[i -1];
+            array[i - 1] = tmp;
+        }
+        print(array);
+
+    }
+
+    public static void buildBigHeap(int [] array,int len){
+        if(array == null || array.length < 1 || len > array.length){
+            return;
+        }
+        int mi = len/2 - 1;
+        int tmp;
+        while(mi >= 0){
+            int c = mi * 2 + 1;
+            if(c < len && array [mi] < array[c]){
+                tmp = array[mi];
+                array[mi] = array[c];
+                array[c] = tmp;
+            }
+            if(c + 1 < len && array [mi] < array[c + 1]){
+                tmp = array[mi];
+                array[mi] = array[c + 1];
+                array[c + 1] = tmp;
+            }
+            if((c*2+1 < len && array[c*2+1] > array[c]) || (c*2+2 < len && array[c*2+2] > array[c])){
+                buildBigHeap(array,len);
+            }
+            mi--;
+        }
+    }
+
+    /**
+     * 堆排序：使用大顶堆做升序排序(非递归实现)
+     * 1、先n个元素的无序序列，构建成大顶堆。
+     * 2、将根节点与最后一个元素交换位置，（将最大元素"沉"到数组末端）。
+     * 3、交换过后可能不再满足大顶堆的条件，所以需要将剩下的n-1个元素重新构建成大顶堆。
+     * 4、重复第2步、第3步直到整个数组排序完成
+     * @param array
+     */
+    public static void heapSort1(int [] array){
+        if(array == null || array.length < 1){
+            return;
+        }
+        int len = array.length;
+        //每次获取一个最大值，需要获取N-1次，最后一次可以不需要
+        while(len > 1){
+            //获取该对的最后一个非叶子节点
+            int mi = len/2 - 1;
+            int tmp;
+            //从最后一个非叶子节点开始，循环到堆顶，每个子树都要满足大顶堆特点
+            while(mi >=0){
+                int c = 2*mi + 1;
+                //如果该节点的叶子节点比该节点值大则需要交换数据
+                while((c < len && array[c] > array[mi]) || (c+1 < len && array[c+1] > array[mi])){
+                    if(c < len && array [mi] < array[c]){
+                        tmp = array[mi];
+                        array[mi] = array[c];
+                        array[c] = tmp;
+                    }
+                    if(c + 1 < len && array [mi] < array[c + 1]){
+                        tmp = array[mi];
+                        array[mi] = array[c + 1];
+                        array[c + 1] = tmp;
+                    }
+                    c = 2*c + 1;
+                }
+                mi --;
+            }
+            tmp = array[0];
+            array[0] = array[len -1];
+            array[len - 1] = tmp;
+            len --;
+        }
+        print(array);
 
     }
 
