@@ -3,20 +3,54 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <!--加载顺序与配置先后无关，加载顺序为：ServletContext -> listener -> filter -> servlet
+     而同个类型之间的实际程序调用的时候的顺序是根据对应的 mapping 的顺序进行调用的-->
+
+    <!--定义站点的名称-->
+    <display-name>xxx</display-name>
+    <!--定义站点的描述-->
+    <description>xxx</description>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
+    <!--监听器用于监听HttpSession、ServletRequest等域对象的创建与销毁事件。此处用的spring
+    监听器ContextLoaderListener目得是在容器启动的时候，自动加载ApplicationContext配置信息
+     -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+    <!--该标签专门配置session失效的时间(分钟)，也可以通过代码request.getSession.setMaxInactiveInterval来实现的-->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--load-on-startup该值如果是负数的话就表示该Servlet在调用的时候才会加载，
+        如果是非负整数的话就表示在容器初始化的时候被加载，且值越小越先加载-->
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.form</url-pattern>
     </servlet-mapping>
+
+    <!--配置错误页，意思就是Http的状态码返回404,500错误，就跳转到指定的location页面。
+      exception-type就是指web应用抛出了指定的异常就跳转到指定的location页面。-->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error/500</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error/500</location>
+    </error-page>
 </web-app>
