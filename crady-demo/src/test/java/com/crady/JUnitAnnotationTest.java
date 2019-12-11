@@ -9,7 +9,7 @@ import org.junit.Test;
  * date :2019/12/5 10:25
  * desc :
  * 执行顺序：@BeforeClass>@Before>@Test>@After>@AfterClass
- * @AfterClass、@AfterClass修饰的方法必须为静态方法，且只会执行一次。
+ * @BeforeClass、@AfterClass修饰的方法必须为静态方法，且只会执行一次。
  * @Before、@After修饰的方法只能是非静态方法，执行一次@Test就会执行一次。
  **/
 @Slf4j
