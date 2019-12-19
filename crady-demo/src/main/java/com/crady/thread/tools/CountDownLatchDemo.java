@@ -13,19 +13,13 @@ import java.util.concurrent.CountDownLatch;
 public class CountDownLatchDemo {
     static CountDownLatch countDownLatch = new CountDownLatch(2);
     public void demo(){
-       new Thread(new Runnable() {
-           @Override
-           public void run() {
-               log.info("thread-1 run");
-               countDownLatch.countDown();
-           }
+       new Thread(() -> {
+           log.info("thread-1 run");
+           countDownLatch.countDown();
        },"thread-1").start();
-       new Thread(new Runnable() {
-           @Override
-           public void run() {
-               log.info("thread-2 run");
-               countDownLatch.countDown();
-           }
+       new Thread(() -> {
+           log.info("thread-2 run");
+           countDownLatch.countDown();
        },"thread-2").start();
     }
     public static void main(String[] args) throws Exception{

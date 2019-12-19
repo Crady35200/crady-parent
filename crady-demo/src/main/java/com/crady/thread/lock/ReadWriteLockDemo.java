@@ -52,8 +52,8 @@ public class ReadWriteLockDemo {
             public void run() {
                 try {
                     demo.handleRead(readLock);
-//          demo.handleRead(lock);
-          cd.countDown();
+//                  demo.handleRead(lock);
+                    cd.countDown();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -65,7 +65,7 @@ public class ReadWriteLockDemo {
             public void run() {
                 try {
                     demo.handleWrite(writeLock, new Random().nextInt());
-//          demo.handleWrite(lock, new Random().nextInt());
+//                  demo.handleWrite(lock, new Random().nextInt());
                     cd.countDown();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
