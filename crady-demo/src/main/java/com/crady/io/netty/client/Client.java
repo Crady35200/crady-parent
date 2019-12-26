@@ -7,6 +7,8 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 
 import java.net.InetSocketAddress;
 
@@ -37,6 +39,10 @@ public class Client {
                 .handler(new ChannelInitializer<Channel>() {
                     @Override
                     protected void initChannel(Channel channel) throws Exception {
+                        //不添加以下两个解码器会有粘包/拆包问题
+                        channel.pipeline().addLast(new LineBasedFrameDecoder(1024));
+                        channel.pipeline().addLast(new StringDecoder());
+
                         channel.pipeline().addLast(new ClientHandler());
                     }
                 });

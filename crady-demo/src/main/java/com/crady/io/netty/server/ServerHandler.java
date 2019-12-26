@@ -1,13 +1,15 @@
 package com.crady.io.netty.server;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
+
+import java.time.LocalDateTime;
+
+import static io.netty.util.CharsetUtil.UTF_8;
 
 /**
  * author:Crady
@@ -17,11 +19,18 @@ import lombok.extern.slf4j.Slf4j;
 @ChannelHandler.Sharable
 @Slf4j
 public class ServerHandler extends ChannelInboundHandlerAdapter {
+
+    private int count;
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+ /*     有粘包/拆包问题
         ByteBuf byteBuf = (ByteBuf) msg;
-        log.info("msg={}",byteBuf.toString(CharsetUtil.UTF_8));
-        ctx.write(byteBuf);
+        String result = byteBuf.toString(CharsetUtil.UTF_8);*/
+        String result = (String)msg;
+        log.info("msg={},count={}",result,++count);
+        String s = "query now time".equals(result) ?
+                "now time is : " + LocalDateTime.now() : "bad request";
+        ctx.write(Unpooled.copiedBuffer(s + System.getProperty("line.separator"), UTF_8));
     }
 
     @Override

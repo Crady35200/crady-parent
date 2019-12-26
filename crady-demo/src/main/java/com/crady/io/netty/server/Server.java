@@ -7,6 +7,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 
 /**
  * author:Crady
@@ -32,6 +34,10 @@ public class Server {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
+                        //不添加以下两个解码器会有粘包/拆包问题
+                        socketChannel.pipeline().addLast(new LineBasedFrameDecoder(1024));
+                        socketChannel.pipeline().addLast(new StringDecoder());
+
                         socketChannel.pipeline().addLast(handler);
                     }
                 });

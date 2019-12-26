@@ -1,6 +1,5 @@
 package com.crady.io.netty.client;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -15,6 +14,8 @@ import static io.netty.util.CharsetUtil.UTF_8;
  **/
 @Slf4j
 public class ClientHandler extends ChannelInboundHandlerAdapter {
+
+    private int count;
     /**
      * 当客户端和服务端TCP链路建立成功后调用该方法
      * @param ctx
@@ -23,7 +24,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         log.info("===============channelActive==================");
-        ctx.writeAndFlush(Unpooled.copiedBuffer("Hello,Netty...", UTF_8));
+        for (int i = 0; i < 100; i++) {
+            ctx.writeAndFlush(Unpooled.copiedBuffer("query now time" + System.getProperty("line.separator"), UTF_8));
+        }
     }
 
     /**
@@ -35,8 +38,11 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         log.info("===============channelRead==================");
+/*      有拆包/粘包问题
         ByteBuf byteBuf = (ByteBuf) msg;
-        log.info("byteBuf = {}" , byteBuf.toString(UTF_8));
+        log.info("byteBuf = {},count={}" , byteBuf.toString(UTF_8),++count);*/
+        String result = (String) msg;
+        log.info("byteBuf = {},count={}" , result,++count);
     }
 
     @Override
