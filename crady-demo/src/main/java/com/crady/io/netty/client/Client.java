@@ -1,6 +1,9 @@
 package com.crady.io.netty.client;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -31,18 +34,24 @@ public class Client {
                 .channel(NioSocketChannel.class)
                 //配置远程网络地址
                 .remoteAddress(new InetSocketAddress(HOST,PORT))
-                .handler(new ClientHandler());
+                .handler(new ChannelInitializer<Channel>() {
+                    @Override
+                    protected void initChannel(Channel channel) throws Exception {
+                        channel.pipeline().addLast(new ClientHandler());
+                    }
+                });
         try {
-            bootstrap.connect().sync();
+            ChannelFuture future = bootstrap.connect().sync();
+            future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }/*finally {
-            try {
+        }finally {
+            try {//优雅退出释放NIO线程组
                 group.shutdownGracefully().sync();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
 
     }
 }
