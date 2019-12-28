@@ -1,6 +1,7 @@
 package com.crady.io.netty.client;
 
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import static io.netty.util.CharsetUtil.UTF_8;
  * date:2019/08/18 20:25
  * desc:
  **/
+@ChannelHandler.Sharable
 @Slf4j
 public class ClientHandler extends ChannelInboundHandlerAdapter {
 
@@ -52,6 +54,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx, cause);
+        cause.printStackTrace();//打印异常栈
+        ctx.close();//关闭channel
     }
 }
