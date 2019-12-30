@@ -1,5 +1,7 @@
 package com.crady.algorithm;
 
+import java.util.Random;
+
 /**
  * author:Crady
  * date:2019/09/05 21:54
@@ -8,13 +10,24 @@ package com.crady.algorithm;
 public class SortMethod {
 
     public static void main(String[] args) {
-        int [] array = new int[]{2,3,4,5,6,7};
+        int [] array = new int[10];
+        Random r = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            array[i] = r.nextInt(100);
+        }
+        System.out.println("排序前数组：");
+        print(array);
+        System.out.println("排序后数组：");
+        insertSort(array);
+
+
 //        int [] array = new int[]{2,8,7,18,9,3,6,12,11,15};
 //        bubbleSort(array);
 //        bubbleSort2(array);
 //        selectSort(array);
 //        quickSort(array,0,array.length - 1);
-        heapSort1(array);
+//        heapSort1(array);
 //        print(array);
     }
 
@@ -37,8 +50,8 @@ public class SortMethod {
         }
         int tmp;
         int n = 0;
-        for (int i = 0; i < array.length - 1; i++) {
-            for (int j = 0; j < array.length - i - 1; j++) {
+        for (int i = 1; i < array.length; i++) {
+            for (int j = 0; j < array.length - i; j++) {
                 n++;
                 if(array[j + 1] < array[j]){
                     tmp = array[j + 1];
@@ -255,6 +268,30 @@ public class SortMethod {
         }
         print(array);
 
+    }
+
+    /**
+     * 1、把第一个元素当做最小的数字(相当于只有一个元素的有序数组)。
+     * 2、从第二个元素开始遍历，取每个元素与第一步中的每个元素对比
+     * 如果小于1中的某个元素，这交换位置。
+     * 3、重复1和2步骤。
+     * @param array
+     */
+    public static void insertSort(int [] array){
+        if(null == array || array.length < 1){
+            return;
+        }
+        int tmp;
+        for (int i = 1; i < array.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if(array[i] < array[j]){
+                    tmp = array[i];
+                    array[i] = array[j];
+                    array[j] = tmp;
+                }
+            }
+        }
+        print(array);
     }
 
     public static void print(int [] array){
