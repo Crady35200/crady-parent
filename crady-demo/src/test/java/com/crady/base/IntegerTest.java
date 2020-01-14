@@ -28,15 +28,15 @@ public class IntegerTest {
 
     @Test
     public void iTest(){
-        Integer a = 1000,b=5000;
-//        swap(a,b);
+        Integer a = 1,b=5;
+        swap(a,b);
 //        unSafeSwap(a,b);
-        errorSwap(a,b);
+//        errorSwap(a,b);
         System.out.println("a = " + a + ",b= " + b);
     }
 
     /**
-     * 通过反射实现整数交换
+     * 方法一、通过反射实现整数交换
      * @param a
      * @param b
      */
@@ -52,14 +52,15 @@ public class IntegerTest {
              * 获取的还是原值(可以参考Integer.valueOf源码)，如果比较的int值
              * 不在-128~127则是没有问题。
              */
-            field.set(a,new Integer(tmp));
+            System.out.println("====a=" + a + ",b=" + b + ",tmp=" + tmp + ",new tmp=" + new Integer(tmp) + ",valueof=" + Integer.valueOf(tmp));
+            field.set(b,new Integer(tmp));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * 通过Unsafe实现整数交换
+     * 方法二、通过Unsafe实现整数交换
      * @param a
      * @param b
      */
