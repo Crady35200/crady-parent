@@ -24,7 +24,7 @@ public class CacheBuilderDemo {
             //获取不到会抛异常
             System.out.println(cache.get("1"));
             cache.put("1","one");
-            //清空所有可以
+            //清空所有缓存
             cache.invalidateAll();
             System.out.println(cache.get("1"));
             cache.put("1","one");
