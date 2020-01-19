@@ -51,13 +51,18 @@ public class SortMethod {
         int tmp;
         int n = 0;
         for (int i = 1; i < array.length; i++) {
+            boolean flag = false;
             for (int j = 0; j < array.length - i; j++) {
                 n++;
                 if(array[j + 1] < array[j]){
                     tmp = array[j + 1];
                     array[j + 1] = array[j];
                     array[j] = tmp;
+                    flag = true;
                 }
+            }
+            if(!flag){//最好的情况下，时间复杂度为n，因为有序直接推出循环
+                break;
             }
         }
         System.out.println("比较次数 bubbleSort n=" + n);
@@ -78,13 +83,18 @@ public class SortMethod {
         int n = 0;
         int temp;
         for (int i = array.length - 1; i > 0; i--) { //外层循环移动游标
+            boolean flag = false;
             for(int j = 0; j < i; j++){    //内层循环遍历游标及之后(或之前)的元素
                 n++;
                 if(array[j] > array[j+1]){
                     temp = array[j];
                     array[j] = array[j+1];
                     array[j+1] = temp;
+                    flag = true;
                 }
+            }
+            if(!flag){//最好的情况下，时间复杂度为n，因为有序直接推出循环
+                break;
             }
         }
         System.out.println("冒泡排序用时:" + (System.nanoTime() - start) + " nanos");
