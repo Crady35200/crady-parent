@@ -19,7 +19,7 @@ public class SortMethod {
         System.out.println("排序前数组：");
         print(array);
         System.out.println("排序后数组：");
-        insertSort(array);
+//        insertSort(array);
 
 
 //        int [] array = new int[]{2,8,7,18,9,3,6,12,11,15};
@@ -27,7 +27,7 @@ public class SortMethod {
 //        bubbleSort2(array);
 //        selectSort(array);
 //        quickSort(array,0,array.length - 1);
-//        heapSort1(array);
+        heapSort1(array);
 //        print(array);
     }
 
@@ -202,7 +202,7 @@ public class SortMethod {
         for (int i = array.length; i > 1; i--) {
             buildBigHeap(array,i);
             tmp = array[0];
-            array[0] = array[i -1];
+            array[0] = array[i - 1];
             array[i - 1] = tmp;
         }
         print(array);
@@ -249,7 +249,7 @@ public class SortMethod {
         int len = array.length;
         //每次获取一个最大值，需要获取N-1次，最后一次可以不需要
         while(len > 1){
-            //获取该对的最后一个非叶子节点
+            //获取该堆的最后一个非叶子节点
             int mi = len/2 - 1;
             int tmp;
             //从最后一个非叶子节点开始，循环到堆顶，每个子树都要满足大顶堆特点
@@ -269,7 +269,7 @@ public class SortMethod {
                     }
                     c = 2*c + 1;
                 }
-                mi --;
+                mi--;
             }
             tmp = array[0];
             array[0] = array[len -1];
