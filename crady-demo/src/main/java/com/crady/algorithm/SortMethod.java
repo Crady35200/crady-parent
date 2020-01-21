@@ -1,5 +1,6 @@
 package com.crady.algorithm;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -10,10 +11,11 @@ import java.util.Random;
 public class SortMethod {
 
     public static void main(String[] args) {
-        int [] array = new int[10];
+        int N = 20;
+        int [] array = new int[N];
         Random r = new Random();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < N; i++) {
             array[i] = r.nextInt(100);
         }
         System.out.println("排序前数组：");
@@ -27,7 +29,8 @@ public class SortMethod {
 //        bubbleSort2(array);
 //        selectSort(array);
 //        quickSort(array,0,array.length - 1);
-        heapSort1(array);
+//        heapSort1(array);
+          print(mergeSort(array));
 //        print(array);
     }
 
@@ -303,6 +306,59 @@ public class SortMethod {
         }
         print(array);
     }
+
+    /**
+     * 归并排序-递归实现,容易出现栈溢出
+     * @param array
+     * @return
+     */
+    public static int[] mergeSort(int [] array){
+        if(null == array || array.length < 1){
+            return null;
+        }
+        if(array.length < 2){
+            return array;
+        }
+        //递归调用，直到数组拆分为单个元素的数组，然后依次合并各个数组
+        int mid = array.length >> 1;
+        int[] low = Arrays.copyOfRange(array,0,mid);
+        int[] high = Arrays.copyOfRange(array,mid,array.length);
+        return merge(mergeSort(low),mergeSort(high));
+
+    }
+
+    /**
+     * 合并两个有序的数组
+     * @param low
+     * @param high
+     * @return
+     */
+    public static int [] merge(int [] low,int [] high){
+        if(low == null || low.length < 1){
+            return high;
+        }
+        if(high == null || high.length < 1){
+            return low;
+        }
+        int [] temp = new int[low.length + high.length];
+        int i=0,j=0,k=0;
+        while(i < low.length && j < high.length){
+            if(low[i] < high[j]){
+                temp[k++] = low[i++];
+            }else{
+                temp[k++] = high[j++];
+            }
+        }
+        while(i < low.length){
+            temp[k++] = low[i++];
+        }
+        while(j < high.length){
+            temp[k++] = high[j++];
+        }
+        return temp;
+    }
+
+
 
     public static void print(int [] array){
         for (int n : array) {
