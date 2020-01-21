@@ -29,8 +29,8 @@ public class SortMethod {
 //        bubbleSort2(array);
 //        selectSort(array);
 //        quickSort(array,0,array.length - 1);
-//        heapSort1(array);
-          print(mergeSort(array));
+        heapSort1(array);
+//          print(mergeSort(array));
 //        print(array);
     }
 
@@ -270,7 +270,7 @@ public class SortMethod {
                         array[mi] = array[c + 1];
                         array[c + 1] = tmp;
                     }
-                    c = 2*c + 1;
+//                    c = 2*c + 1;
                 }
                 mi--;
             }
