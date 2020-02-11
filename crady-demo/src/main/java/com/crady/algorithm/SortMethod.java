@@ -1,5 +1,6 @@
 package com.crady.algorithm;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -10,16 +11,17 @@ import java.util.Random;
 public class SortMethod {
 
     public static void main(String[] args) {
-        int [] array = new int[10];
+        int N = 20;
+        int [] array = new int[N];
         Random r = new Random();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < N; i++) {
             array[i] = r.nextInt(100);
         }
         System.out.println("排序前数组：");
         print(array);
         System.out.println("排序后数组：");
-        insertSort(array);
+//        insertSort(array);
 
 
 //        int [] array = new int[]{2,8,7,18,9,3,6,12,11,15};
@@ -27,7 +29,8 @@ public class SortMethod {
 //        bubbleSort2(array);
 //        selectSort(array);
 //        quickSort(array,0,array.length - 1);
-//        heapSort1(array);
+        heapSort1(array);
+//          print(mergeSort(array));
 //        print(array);
     }
 
@@ -51,13 +54,18 @@ public class SortMethod {
         int tmp;
         int n = 0;
         for (int i = 1; i < array.length; i++) {
+            boolean flag = false;
             for (int j = 0; j < array.length - i; j++) {
                 n++;
                 if(array[j + 1] < array[j]){
                     tmp = array[j + 1];
                     array[j + 1] = array[j];
                     array[j] = tmp;
+                    flag = true;
                 }
+            }
+            if(!flag){//最好的情况下，时间复杂度为n，因为有序直接推出循环
+                break;
             }
         }
         System.out.println("比较次数 bubbleSort n=" + n);
@@ -78,13 +86,18 @@ public class SortMethod {
         int n = 0;
         int temp;
         for (int i = array.length - 1; i > 0; i--) { //外层循环移动游标
+            boolean flag = false;
             for(int j = 0; j < i; j++){    //内层循环遍历游标及之后(或之前)的元素
                 n++;
                 if(array[j] > array[j+1]){
                     temp = array[j];
                     array[j] = array[j+1];
                     array[j+1] = temp;
+                    flag = true;
                 }
+            }
+            if(!flag){//最好的情况下，时间复杂度为n，因为有序直接推出循环
+                break;
             }
         }
         System.out.println("冒泡排序用时:" + (System.nanoTime() - start) + " nanos");
@@ -192,7 +205,7 @@ public class SortMethod {
         for (int i = array.length; i > 1; i--) {
             buildBigHeap(array,i);
             tmp = array[0];
-            array[0] = array[i -1];
+            array[0] = array[i - 1];
             array[i - 1] = tmp;
         }
         print(array);
@@ -239,7 +252,7 @@ public class SortMethod {
         int len = array.length;
         //每次获取一个最大值，需要获取N-1次，最后一次可以不需要
         while(len > 1){
-            //获取该对的最后一个非叶子节点
+            //获取该堆的最后一个非叶子节点
             int mi = len/2 - 1;
             int tmp;
             //从最后一个非叶子节点开始，循环到堆顶，每个子树都要满足大顶堆特点
@@ -257,9 +270,9 @@ public class SortMethod {
                         array[mi] = array[c + 1];
                         array[c + 1] = tmp;
                     }
-                    c = 2*c + 1;
+//                    c = 2*c + 1;
                 }
-                mi --;
+                mi--;
             }
             tmp = array[0];
             array[0] = array[len -1];
@@ -314,6 +327,59 @@ public class SortMethod {
         }
         print(array);
     }
+
+    /**
+     * 归并排序-递归实现,容易出现栈溢出
+     * @param array
+     * @return
+     */
+    public static int[] mergeSort(int [] array){
+        if(null == array || array.length < 1){
+            return null;
+        }
+        if(array.length < 2){
+            return array;
+        }
+        //递归调用，直到数组拆分为单个元素的数组，然后依次合并各个数组
+        int mid = array.length >> 1;
+        int[] low = Arrays.copyOfRange(array,0,mid);
+        int[] high = Arrays.copyOfRange(array,mid,array.length);
+        return merge(mergeSort(low),mergeSort(high));
+
+    }
+
+    /**
+     * 合并两个有序的数组
+     * @param low
+     * @param high
+     * @return
+     */
+    public static int [] merge(int [] low,int [] high){
+        if(low == null || low.length < 1){
+            return high;
+        }
+        if(high == null || high.length < 1){
+            return low;
+        }
+        int [] temp = new int[low.length + high.length];
+        int i=0,j=0,k=0;
+        while(i < low.length && j < high.length){
+            if(low[i] < high[j]){
+                temp[k++] = low[i++];
+            }else{
+                temp[k++] = high[j++];
+            }
+        }
+        while(i < low.length){
+            temp[k++] = low[i++];
+        }
+        while(j < high.length){
+            temp[k++] = high[j++];
+        }
+        return temp;
+    }
+
+
 
     public static void print(int [] array){
         for (int n : array) {

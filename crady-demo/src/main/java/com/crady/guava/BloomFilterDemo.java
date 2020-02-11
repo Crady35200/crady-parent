@@ -36,11 +36,8 @@ public class BloomFilterDemo {
             }else{
                 b++;
             }
-            if(!bf.mightContain("" + i)){
-                c++;
-            }
         }
-        System.out.println("a = " + a + ",b = " + b + ",c = " + c);
+        System.out.println("a = " + a + ",b = " + b);
     }
 
 }
