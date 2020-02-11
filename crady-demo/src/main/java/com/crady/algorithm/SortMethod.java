@@ -134,7 +134,7 @@ public class SortMethod {
      * 2、从最右边向左搜索比基准小的记录array[h]。
      * 3、从最左边向右搜索比基准大的记录array[l]。
      * 4、如果h>l则交换两者值。
-     * 5、如果l=h则想换l和基准的值。
+     * 5、如果l=h则交换l和基准的值。
      * 6、进行新的一轮比较。
      * 时间复杂度：平均时间复杂度：O(nlogn)  最好:O(nlogn)  最坏:O(n~2)
      * 空间复杂度：O(logn)
@@ -271,13 +271,34 @@ public class SortMethod {
     }
 
     /**
+     * 1、把第一个元素认为是有序。
+     * 2、从第二个元素开始该元素往前依次对比，如果小于则把大的元素后移。
+     * 3、重复2步骤，直到找到合适的位置，然后设值。
+     * @param array
+     */
+    public static void insertSort(int [] array){
+        if(null == array || array.length < 1){
+            return;
+        }
+        for (int i = 1; i < array.length; i++) {
+            int t = array[i];
+            int j = i;
+            while(--j >= 0 && t < array[j]){
+                array[j + 1] = array[j];
+            }
+            array[j + 1] = t;
+        }
+        print(array);
+    }
+
+    /**
      * 1、把第一个元素当做最小的数字(相当于只有一个元素的有序数组)。
      * 2、从第二个元素开始遍历，取每个元素与第一步中的每个元素对比
      * 如果小于1中的某个元素，这交换位置。
      * 3、重复1和2步骤。
      * @param array
      */
-    public static void insertSort(int [] array){
+    public static void insertSort2(int [] array){
         if(null == array || array.length < 1){
             return;
         }
