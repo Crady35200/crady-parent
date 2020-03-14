@@ -61,7 +61,7 @@ public class FactoryDesignTest {
     @Test
     public void testAbstractFactory(){
         AbstractFactory defaultFactory = new DefaultFactory();
-        log.info("bmw:{}",defaultFactory.getCar());
+        log.info("benz:{}",defaultFactory.getCar());
         log.info("bmw:{}",defaultFactory.getCar("BMW"));
     }
 
