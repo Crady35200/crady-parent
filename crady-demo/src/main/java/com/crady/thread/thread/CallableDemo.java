@@ -23,7 +23,7 @@ public class CallableDemo implements Callable<String> {
         FutureTask futureTask = new FutureTask<>(new CallableDemo());
         new Thread(futureTask).start();
         try {
-            System.out.println(futureTask.get());
+            System.out.println(Thread.currentThread().getName() + ":" + futureTask.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
