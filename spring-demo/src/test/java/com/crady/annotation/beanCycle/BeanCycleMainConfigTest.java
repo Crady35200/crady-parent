@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 /**
  * author:Crady
  * date:2019/08/01 23:22
- * desc:
+ * desc: spring事件
  **/
 @Slf4j
 public class BeanCycleMainConfigTest {
