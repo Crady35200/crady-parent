@@ -246,6 +246,7 @@ public class SortMethod {
      * @param array
      */
     public static void heapSort1(int [] array){
+        System.out.println("************堆排序(非递归实现)*****************");
         if(array == null || array.length < 1){
             return;
         }
@@ -259,18 +260,16 @@ public class SortMethod {
             while(mi >=0){
                 int c = 2*mi + 1;
                 //如果该节点的叶子节点比该节点值大则需要交换数据
-                while((c < len && array[c] > array[mi]) || (c+1 < len && array[c+1] > array[mi])){
-                    if(c < len && array [mi] < array[c]){
-                        tmp = array[mi];
-                        array[mi] = array[c];
-                        array[c] = tmp;
-                    }
-                    if(c + 1 < len && array [mi] < array[c + 1]){
-                        tmp = array[mi];
-                        array[mi] = array[c + 1];
-                        array[c + 1] = tmp;
-                    }
-//                    c = 2*c + 1;
+                if(c < len && array[c] > array[mi]){
+                    tmp = array[mi];
+                    array[mi] = array[c];
+                    array[c] = tmp;
+                }
+                if(c+1 < len && array[c+1] > array[mi]){
+                    tmp = array[mi];
+                    array[mi] = array[c + 1];
+                    array[c + 1] = tmp;
+
                 }
                 mi--;
             }
