@@ -1,4 +1,4 @@
-package com.crady.base;
+package com.crady.jdk8;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -13,7 +13,7 @@ import java.util.Date;
  * date :2019/12/11 11:05
  * desc : JDK1.8新日期API
  **/
-public class DateTest {
+public class DateDemo {
 
     private static final String DATE_FORMAT = "YYYY-MM-dd HH:mm:ss";
     public static void main(String []args){
