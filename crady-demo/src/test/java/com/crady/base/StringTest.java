@@ -48,18 +48,28 @@ public class StringTest {
         System.out.println(s1 == s2);
     }
 
+    /**
+     *  s.intern()方法：
+     *    在JDK1.6的时候，调用了这个方法之后，虚拟机会在字符串常量池在查找是否有内容与”tt”相等的对象，
+     *    如果有，则返回这个对象，如果没有，则会在字符串常量池中添加这个对象。注意，
+     *    是把这个对象添加到字符串常量池。
+     *
+     *    到了JDK1.7之后，如果调用了intern这个方法，
+     *    虚拟机会在字符串常量池在查找是否有内容与”tt”相等的对象，如果有，则返回这个对象，如果没有。
+     *    则会在堆中把这个对象的引用复制添加到字符串常量池中。注意，这个时候添加的是对象在堆中的引用。
+     */
     @Test
     public void test11(){
         String s1 = new String("1") + new String("23");
-        s1.intern();
-        String s2 = "123";
+        s1.intern();//执行此句后常量的引用指向堆中的引用
+        String s2 = "123";//s2指向常量池中的引用，但是经过s1.intern()后常量池的引用其实就是堆中引用的拷贝
         System.out.println(s1 == s2);
     }
 
     @Test
     public void test12(){
-        String s1 = new String("1") + new String("23");
-        String s2 = "123";
+        String s1 = new String("1") + new String("23");//此时s1指向堆中的引用
+        String s2 = "123";//此时s2指向常量池中的引用
         s1.intern();
         System.out.println(s1 == s2);
     }
