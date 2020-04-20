@@ -3,6 +3,7 @@ package com.crady.io.netty.server;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -26,13 +27,18 @@ public class Server {
     }
 
     private void start() {
-        EventLoopGroup group = new NioEventLoopGroup();
+        //用来接收客户端连接的线程组
+        EventLoopGroup bossGroup = new NioEventLoopGroup();
+        //用来处理网络读写的线程组
+        EventLoopGroup workGroup = new NioEventLoopGroup();
         ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(group)
+        bootstrap.group(bossGroup,workGroup)
                 //指定所使用的NIO传输Channel
                 .channel(NioServerSocketChannel.class)
                 //使用指定的端口
                 .localAddress(PORT)
+                //设置请求队列大小
+                .option(ChannelOption.SO_BACKLOG,1024)
                 //添加一个ServerHandler到子Channel的ChannelPipeline
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
@@ -51,7 +57,8 @@ public class Server {
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             //优化的关闭EventLoopGroup并释放所有的资源
-            group.shutdownGracefully();
+            bossGroup.shutdownGracefully();
+            workGroup.shutdownGracefully();
             e.printStackTrace();
         }
     }

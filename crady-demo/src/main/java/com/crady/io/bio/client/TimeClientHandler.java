@@ -26,10 +26,10 @@ public class TimeClientHandler extends Thread{
         BufferedReader reader = null;
         try{
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String line;
-            while((line = reader.readLine()) != null){
+            String line =reader.readLine();
+//            while((line = reader.readLine()) != null){//如果放在循环中reader.readLine()读不到值会一直阻塞
                 System.out.println("receive from server : " + line);
-            }
+//            }
         } catch (IOException e) {
             e.printStackTrace();
         }finally {

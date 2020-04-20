@@ -1,10 +1,7 @@
 package com.crady.io.netty.client;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
@@ -36,6 +33,8 @@ public class Client {
                 .channel(NioSocketChannel.class)
                 //配置远程网络地址
                 .remoteAddress(new InetSocketAddress(HOST,PORT))
+                //设置请求不延时
+                .option(ChannelOption.TCP_NODELAY,true)
                 .handler(new ChannelInitializer<Channel>() {
                     @Override
                     protected void initChannel(Channel channel) throws Exception {
