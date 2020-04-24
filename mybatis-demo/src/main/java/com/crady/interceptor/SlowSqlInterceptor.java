@@ -24,6 +24,12 @@ public class SlowSqlInterceptor implements Interceptor {
     private static final long THRESHOLD_TIME = 500;
     private long threshold;
 
+    /**
+     * 拦截器代理执行的方法
+     * @param invocation
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         long begin = System.currentTimeMillis();
@@ -40,11 +46,20 @@ public class SlowSqlInterceptor implements Interceptor {
         return result;
     }
 
+    /**
+     * 用于拦截器代理生成
+     * @param target
+     * @return
+     */
     @Override
     public Object plugin(Object target) {
         return Plugin.wrap(target,this);
     }
 
+    /**
+     * 用于拦截器属性设置
+     * @param properties
+     */
     @Override
     public void setProperties(Properties properties) {
         String time = properties.getProperty("threshold");
