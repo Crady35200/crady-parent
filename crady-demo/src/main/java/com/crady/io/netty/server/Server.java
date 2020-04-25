@@ -56,10 +56,11 @@ public class Server {
             //获取Channel的CloseFuture并且阻塞当前线程直到完成
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
             //优化的关闭EventLoopGroup并释放所有的资源
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
-            e.printStackTrace();
         }
     }
 }
