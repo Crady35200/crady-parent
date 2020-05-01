@@ -16,7 +16,7 @@ public class AopMainConfigTest {
     @Test
     public void aopMainConfigTest(){
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AopMainConfig.class);
-        DemoService demoService = (DemoService) context.getBean("demoService");
+        DemoService demoService = (DemoService) context.getBean("demoServiceImpl");
         demoService.hello();
 
     }
