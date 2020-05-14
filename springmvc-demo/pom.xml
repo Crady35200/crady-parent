@@ -95,26 +95,45 @@
 
     <build>
         <plugins>
-            <!--使用jetty插件运行-->
             <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/</path>
+                    <port>8080</port>
+                    <server>tomcat7</server>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--使用jetty插件运行-->
+           <!-- <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.4.9.v20180320</version>
-                <!-- Config: contextPath and Port (Default:8080) -->
+                &lt;!&ndash; Config: contextPath and Port (Default:8080) &ndash;&gt;
                 <configuration>
                     <httpConnector>
-                        <!--port,jetty服务器的端口号-->
+                        &lt;!&ndash;port,jetty服务器的端口号&ndash;&gt;
                         <port>8080</port>
-                        <!--host,jetty服务器监听的地址-->
+                        &lt;!&ndash;host,jetty服务器监听的地址&ndash;&gt;
                         <host>localhost</host>
                     </httpConnector>
                     <webAppConfig>
                         <contextPath>/</contextPath>
                     </webAppConfig>
-                    <!--scanIntervalSeconds。扫描进行热部署的间隔时间-->
+                    &lt;!&ndash;scanIntervalSeconds。扫描进行热部署的间隔时间&ndash;&gt;
                     <scanIntervalSeconds>1</scanIntervalSeconds>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 
