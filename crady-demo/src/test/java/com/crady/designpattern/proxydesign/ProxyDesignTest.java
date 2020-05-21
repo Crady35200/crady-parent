@@ -4,6 +4,11 @@ import com.crady.designpattern.proxydesign.dynamicProxy.CglibDynaticProxyFactory
 import com.crady.designpattern.proxydesign.dynamicProxy.JdkDynamicProxyFactory;
 import com.crady.designpattern.proxydesign.staticProxy.StaticProxyFactory;
 import org.junit.Test;
+import sun.misc.ProxyGenerator;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * @author :Crady
@@ -40,6 +45,26 @@ public class ProxyDesignTest {
         IPerson proxyInstance = (IPerson) new JdkDynamicProxyFactory(teacher).getProxyInstance();
         System.out.println(proxyInstance.getClass());
         proxyInstance.say("Hi,nice to meet you !");
+        printProxyClass(proxyInstance);
+    }
+
+    public void printProxyClass(Object obj){
+        Class cls = obj.getClass();
+        byte[] bytes = ProxyGenerator.generateProxyClass(cls.getSimpleName(), cls.getInterfaces());
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(new File(ProxyDesignTest.class.getResource("/").toString().substring(6) + File.separator + cls.getSimpleName() + ".class"));
+            out.write(bytes);
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
