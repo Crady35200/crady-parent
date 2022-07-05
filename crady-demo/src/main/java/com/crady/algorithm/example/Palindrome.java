@@ -3,13 +3,13 @@ package com.crady.algorithm.example;
 /**
  * @author: Crady
  * date: 2022/7/3 19:06
- * desc:
+ * desc: 给你一个字符串 s，找到 s 中最长的回文子串。
  **/
 public class Palindrome {
 
     public static void main(String[] args) {
 
-        String s = "babad";
+        String s = "bb";
         String result = new Palindrome().longestPalindrome(s);
         System.out.printf(result);
 
@@ -33,10 +33,10 @@ public class Palindrome {
 
         int index = 0;
         int maxLength = 1;
-        for (int l = 2; l < len; l++) {
+        for (int l = 2; l <= len; l++) {
             for (int i = 0; i < len; i++) {
                 int j = i + l - 1;
-                if (j >= chars.length) {
+                if (j >= len) {
                     break;
                 }
                 if (chars[i] != chars[j]) {
