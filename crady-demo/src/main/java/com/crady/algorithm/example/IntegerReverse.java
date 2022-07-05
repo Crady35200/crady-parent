@@ -44,4 +44,24 @@ public class IntegerReverse {
         return result;
     }
 
+    public int integerReverse2(int n) {
+        int result = 0;
+        int k;
+        boolean isBigger, isSmaller;
+        while (n != 0) {
+            k = n % 10;
+
+            isBigger = result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && k > Integer.MAX_VALUE % 10);
+            isSmaller = result < Integer.MIN_VALUE / 10 || (result == Integer.MIN_VALUE / 10 && k < Integer.MIN_VALUE % 10);
+            if (isBigger || isSmaller) {
+                return 0;
+            }
+            result = result * 10 + k;
+            n = n / 10;
+
+        }
+
+        return result;
+    }
+
 }
