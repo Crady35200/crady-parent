@@ -1,7 +1,8 @@
 package com.crady.algorithm.example;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * @author: Crady
@@ -16,16 +17,17 @@ import java.util.HashMap;
  * 输入: [[7,10],[2,4]]
  * 输出: 1
  **/
-public class MaxRoom {
+public class MinRoom {
 
     public static void main(String[] args) {
-//        int [][] array = {{0,30},{5,10},{15,20}};
-        int [][] array = {{7,10},{2,4}};
-        MaxRoom maxRoom = new MaxRoom();
-        System.out.println(maxRoom.getMaxRoom(array));
+        int [][] array = {{0,30},{5,10},{15,20}};
+//        int [][] array = {{7,10},{2,4}};
+        MinRoom maxRoom = new MinRoom();
+        System.out.println(maxRoom.getMinRoom(array));
+        System.out.println(maxRoom.getMinRoom2(array));
     }
 
-    public int getMaxRoom(int [][] array) {
+    public int getMinRoom(int [][] array) {
         if (array == null || array.length < 1) {
             return 0;
         }
@@ -51,6 +53,32 @@ public class MaxRoom {
             rooms = Math.max(rooms,0);
         }
         return rooms;
+
+    }
+
+    public int getMinRoom2(int [][] array) {
+        if (array == null || array.length < 1) {
+            return  -1;
+        }
+        PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        });
+
+        Arrays.sort(array, Comparator.comparingInt(o -> o[0]));
+
+        queue.add(array[0][1]);
+        for (int i = 1; i < array.length; i++) {
+            if (array[i][0] < queue.peek()) {
+                queue.add(array[i][1]);
+            }else {
+                queue.poll();
+                queue.add(array[i][1]);
+            }
+        }
+        return queue.size();
 
     }
 }
