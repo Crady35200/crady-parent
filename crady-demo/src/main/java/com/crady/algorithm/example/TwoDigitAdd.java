@@ -102,4 +102,71 @@ public class TwoDigitAdd {
         ListNode(int val) { this.val = val; }
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
+
+
+    /****方法二(推荐)******/
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode();
+        ListNode n1 = l1;
+        ListNode n2 = l2;
+        int s = 0;
+        ListNode pre = null;
+        while (n1 != null || n2 != null) {
+
+            if (n1 != null && n2 != null) {
+                int add = n1.val + n2.val;
+                add += s;
+                ListNode nd = new ListNode();
+                nd.val = add % 10;
+                s = add / 10;
+                if(pre != null) {
+                    pre.next = nd;
+                }else {
+                    res = nd;
+                }
+                pre = nd;
+                n1 = n1.next;
+                n2 = n2.next;
+                continue;
+            }
+            if (n1 != null) {
+                ListNode nd = new ListNode();
+                int add = n1.val + s;
+                nd.val = add % 10;
+                s = add / 10;
+                pre.next = nd;
+                pre = nd;
+                n1 = n1.next;
+            }
+            if (n2 != null) {
+                ListNode nd = new ListNode();
+                int add = n2.val + s;
+                nd.val = add % 10;
+                s = add / 10;
+                pre.next = nd;
+                pre = nd;
+                n2 = n2.next;
+            }
+        }
+        if(s > 0) {
+            ListNode nd = new ListNode();
+            nd.val = s;
+            pre.next = nd;
+        }
+
+        return res;
+    }
+
+    public ListNode reverseList(ListNode node){
+        ListNode head = null;
+        ListNode nd = node;
+        while (nd != null) {
+            ListNode next = nd.next;
+            nd.next = head;
+            head = nd;
+            nd = next;
+        }
+        return head;
+    }
 }
