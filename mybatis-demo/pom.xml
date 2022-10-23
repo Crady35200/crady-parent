@@ -70,7 +70,7 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <!--官方源码自编译打包版本-->
-            <version>3.5.2-SNAPSHOT</version>
+            <version>3.5.6</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
